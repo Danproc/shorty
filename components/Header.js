@@ -10,12 +10,16 @@ import config from "@/config";
 
 const links = [
   {
-    href: "/#pricing",
-    label: "Pricing",
+    href: "/shorten",
+    label: "URL Shortener",
   },
   {
-    href: "/#testimonials",
-    label: "Reviews",
+    href: "/qr-generator",
+    label: "QR Generator",
+  },
+  {
+    href: "/#pricing",
+    label: "Pricing",
   },
   {
     href: "/#faq",
