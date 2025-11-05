@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
 	return (
 		<html
 			lang="en"
-			data-theme={config.colors.theme}
 			style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}
 		>
 			<body>
