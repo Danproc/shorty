@@ -4,11 +4,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import QRCodeDisplay from './QRCodeDisplay';
+import MarkdownEditor from './MarkdownEditor';
 
 export default function URLShortenerForm({ showCustomSlug = false }) {
   const [url, setUrl] = useState('');
   const [customSlug, setCustomSlug] = useState('');
   const [title, setTitle] = useState('');
+  const [markdownContent, setMarkdownContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -28,6 +30,7 @@ export default function URLShortenerForm({ showCustomSlug = false }) {
         url: url.trim(),
         customSlug: customSlug.trim() || undefined,
         title: title.trim() || undefined,
+        markdownContent: markdownContent.trim() || undefined,
       });
 
       if (response.data.success) {
@@ -38,6 +41,7 @@ export default function URLShortenerForm({ showCustomSlug = false }) {
         setUrl('');
         setCustomSlug('');
         setTitle('');
+        setMarkdownContent('');
         setShowAdvanced(false);
       }
     } catch (error) {
@@ -63,6 +67,7 @@ export default function URLShortenerForm({ showCustomSlug = false }) {
     setUrl('');
     setCustomSlug('');
     setTitle('');
+    setMarkdownContent('');
   };
 
   return (
@@ -135,6 +140,21 @@ export default function URLShortenerForm({ showCustomSlug = false }) {
                   onChange={(e) => setTitle(e.target.value)}
                   disabled={loading}
                   maxLength={100}
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Markdown content (optional)</span>
+                  <span className="label-text-alt text-base-content/60">
+                    Add custom content to display with your short URL
+                  </span>
+                </label>
+                <MarkdownEditor
+                  value={markdownContent}
+                  onChange={setMarkdownContent}
+                  placeholder="# Welcome&#10;&#10;Add markdown content here..."
+                  minHeight={150}
                 />
               </div>
             </div>

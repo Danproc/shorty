@@ -7,12 +7,13 @@ import {
   isValidCustomSlug,
   isReservedSlug,
 } from '@/libs/shortener';
+import { markdownToHtml, validateMarkdown } from '@/libs/markdown';
 
 export async function POST(req) {
   try {
     const supabase = await createClient();
     const body = await req.json();
-    const { url, customSlug, title } = body;
+    const { url, customSlug, title, markdownContent } = body;
 
     // Validate URL
     if (!url) {
@@ -29,6 +30,23 @@ export async function POST(req) {
         { error: 'Invalid URL format. Please include http:// or https://' },
         { status: 400 }
       );
+    }
+
+    // Validate and convert markdown content if provided
+    let htmlContent = null;
+    let validatedMarkdown = null;
+
+    if (markdownContent) {
+      const validation = validateMarkdown(markdownContent);
+      if (!validation.isValid) {
+        return NextResponse.json(
+          { error: validation.error },
+          { status: 400 }
+        );
+      }
+
+      validatedMarkdown = markdownContent;
+      htmlContent = markdownToHtml(markdownContent);
     }
 
     // Get user (optional - anonymous users allowed)
@@ -108,6 +126,8 @@ export async function POST(req) {
           short_code: shortCode,
           original_url: normalizedUrl,
           title: title || null,
+          markdown_content: validatedMarkdown,
+          html_content: htmlContent,
           is_active: true,
         },
       ])
@@ -135,6 +155,8 @@ export async function POST(req) {
         shortUrl: `${baseUrl}/r/${shortUrl.short_code}`,
         originalUrl: shortUrl.original_url,
         title: shortUrl.title,
+        markdownContent: shortUrl.markdown_content,
+        htmlContent: shortUrl.html_content,
         createdAt: shortUrl.created_at,
       },
     });
