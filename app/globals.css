@@ -1,8 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui";
-@plugin "@tailwindcss/typography";
-
-@theme {
+@plugin "daisyui" {
+  themes: custom;
+}
+@plugin "daisyui/theme" custom {
   --color-primary: #3ECF8E;
   --color-primary-content: #000000;
   --color-secondary: #4B5563;
@@ -20,6 +20,7 @@
   --color-warning: #FBBD23;
   --color-error: #F87272;
 }
+@plugin "@tailwindcss/typography";
 
 @theme {
   --font-display: "Satoshi", "sans-serif";
