@@ -1,6 +1,27 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: light --default;
+  themes: [
+    {
+      supabase: {
+        "primary": "#3ECF8E",
+        "primary-content": "#000000",
+        "secondary": "#4B5563",
+        "secondary-content": "#F9FAFB",
+        "accent": "#10B981",
+        "accent-content": "#000000",
+        "neutral": "#1F2937",
+        "neutral-content": "#F9FAFB",
+        "base-100": "#0F1419",
+        "base-200": "#1A1F2E",
+        "base-300": "#242B3D",
+        "base-content": "#E5E7EB",
+        "info": "#3ABFF8",
+        "success": "#3ECF8E",
+        "warning": "#FBBD23",
+        "error": "#F87272",
+      },
+    },
+  ] --default;
 }
 
 @theme {

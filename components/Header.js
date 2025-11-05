@@ -17,14 +17,6 @@ const links = [
     href: "/qr-generator",
     label: "QR Generator",
   },
-  {
-    href: "/#pricing",
-    label: "Pricing",
-  },
-  {
-    href: "/#faq",
-    label: "FAQ",
-  },
 ];
 
 const cta = <ButtonSignin extraStyle="btn-primary" />;
@@ -41,7 +33,7 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <header className="bg-base-200">
+    <header className="border-b border-base-300">
       <nav
         className="container flex items-center justify-between px-8 py-4 mx-auto"
         aria-label="Global"
