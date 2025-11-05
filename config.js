@@ -78,7 +78,7 @@ const config = {
   },
   colors: {
     // REQUIRED — The DaisyUI theme to use (added to the main layout.js). Leave blank for default (light & dark mode).
-    theme: "dark",
+    theme: "",
     // REQUIRED — This color will be reflected on the whole app outside of the document (loading bar, Chrome tabs, etc..).
     // For DaisyUI v5, we use a standard primary color
     main: "#3ECF8E",

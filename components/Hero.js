@@ -5,7 +5,7 @@ import Link from 'next/link';
 // Shorty - Landing page hero section with animated backgrounds and tool cards
 const Hero = () => {
   return (
-    <section className="min-h-[85vh] flex items-center justify-center px-8 py-20 relative overflow-hidden">
+    <section className="flex items-center justify-center px-8 py-20 relative overflow-hidden md:min-h-[85vh]">
       {/* Animated background glow effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}}></div>
