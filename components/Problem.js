@@ -20,7 +20,7 @@ const Problem = () => {
             Perfect for Every Use Case
           </h2>
           <p className="text-lg md:text-xl opacity-80 max-w-2xl mx-auto">
-            Whether you're a marketer, developer, or business owner, our tools
+            Whether you&apos;re a marketer, developer, or business owner, our tools
             help you share content more effectively.
           </p>
         </div>
