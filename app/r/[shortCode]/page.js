@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { createClient } from '@/libs/supabase/server';
 import { isExpired } from '@/libs/shortener';
 
@@ -34,9 +35,9 @@ export default async function RedirectPage({ params }) {
               <p className="text-base-content/70 mb-6">
                 This short link does not exist or has been deleted.
               </p>
-              <a href="/" className="btn btn-primary">
+              <Link href="/" className="btn btn-primary">
                 Go to Homepage
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -57,9 +58,9 @@ export default async function RedirectPage({ params }) {
             <p className="text-base-content/70 mb-6">
               We encountered an error while processing your request.
             </p>
-            <a href="/" className="btn btn-primary">
+            <Link href="/" className="btn btn-primary">
               Go to Homepage
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -77,9 +78,9 @@ export default async function RedirectPage({ params }) {
             <p className="text-base-content/70 mb-6">
               This short link has been deactivated by its owner.
             </p>
-            <a href="/" className="btn btn-primary">
+            <Link href="/" className="btn btn-primary">
               Go to Homepage
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -97,9 +98,9 @@ export default async function RedirectPage({ params }) {
             <p className="text-base-content/70 mb-6">
               This short link has expired and is no longer available.
             </p>
-            <a href="/" className="btn btn-primary">
+            <Link href="/" className="btn btn-primary">
               Go to Homepage
-            </a>
+            </Link>
           </div>
         </div>
       </div>
