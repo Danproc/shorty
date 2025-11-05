@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -13,32 +13,34 @@ export default function MarkdownConverter() {
   const [isPublic, setIsPublic] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleConvert = async () => {
-    if (!markdown.trim()) {
-      toast.error('Please enter some markdown content');
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const response = await axios.post('/api/markdown/convert', {
-        markdown: markdown.trim(),
-      });
-
-      if (response.data.success) {
-        setHtml(response.data.html);
-        setActiveTab('html');
-        toast.success('Converted successfully!');
+  // Auto-convert markdown to HTML whenever markdown changes
+  useEffect(() => {
+    const convertMarkdown = async () => {
+      if (!markdown.trim()) {
+        setHtml('');
+        return;
       }
-    } catch (error) {
-      const errorMessage = error.response?.data?.error || 'Failed to convert markdown';
-      toast.error(errorMessage);
-      console.error('Error converting markdown:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
+      try {
+        const response = await axios.post('/api/markdown/convert', {
+          markdown: markdown.trim(),
+        });
+
+        if (response.data.success) {
+          setHtml(response.data.html);
+        }
+      } catch (error) {
+        console.error('Error converting markdown:', error);
+      }
+    };
+
+    // Debounce the conversion to avoid too many API calls
+    const timer = setTimeout(() => {
+      convertMarkdown();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [markdown]);
 
   const handleSave = async () => {
     if (!markdown.trim()) {
@@ -134,18 +136,11 @@ export default function MarkdownConverter() {
 
             <div className="card-actions justify-between items-center mt-4">
               <button
-                onClick={handleConvert}
+                onClick={() => handleCopy(html, 'HTML')}
                 className="btn btn-primary"
-                disabled={loading || !markdown.trim()}
+                disabled={!html.trim()}
               >
-                {loading ? (
-                  <>
-                    <span className="loading loading-spinner loading-sm"></span>
-                    Converting...
-                  </>
-                ) : (
-                  'Convert to HTML'
-                )}
+                Copy HTML
               </button>
 
               <button
