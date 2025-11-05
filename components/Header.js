@@ -17,6 +17,10 @@ const links = [
     href: "/qr-generator",
     label: "QR Generator",
   },
+  {
+    href: "/markdown",
+    label: "Markdown Converter",
+  },
 ];
 
 const cta = <ButtonSignin extraStyle="btn-primary" />;
