@@ -107,16 +107,17 @@ export function getResponsiveQRSize() {
 }
 
 /**
- * Validate if QR code can be generated for URL
- * @param {string} url - URL to validate
+ * Validate if QR code can be generated for the given text
+ * @param {string} text - Text to validate (URL, plain text, etc.)
  * @returns {boolean} - True if valid
  */
-export function canGenerateQRCode(url) {
-  if (!url || typeof url !== 'string') return false;
+export function canGenerateQRCode(text) {
+  if (!text || typeof text !== 'string') return false;
 
   // QR codes have a maximum capacity
   // For alphanumeric data with error correction level M, max is ~2953 chars
-  if (url.length > 2000) return false;
+  // We use 2000 as a safe limit to ensure compatibility
+  if (text.length > 2000) return false;
 
   return true;
 }
