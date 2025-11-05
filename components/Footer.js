@@ -61,16 +61,6 @@ const Footer = () => {
                 <Link href="/privacy-policy" className="link link-hover">
                   Privacy Policy
                 </Link>
-                {config.resend.supportEmail && (
-                  <a
-                    href={`mailto:${config.resend.supportEmail}`}
-                    target="_blank"
-                    className="link link-hover"
-                    aria-label="Contact Support"
-                  >
-                    Support
-                  </a>
-                )}
               </div>
             </div>
           </div>
