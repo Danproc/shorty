@@ -2,7 +2,10 @@
 @plugin "daisyui" {
   themes: custom;
 }
-@plugin "daisyui/theme" custom {
+@plugin "@tailwindcss/typography";
+
+:root, [data-theme="custom"] {
+  color-scheme: dark;
   --color-primary: #3ECF8E;
   --color-primary-content: #000000;
   --color-secondary: #4B5563;
@@ -20,7 +23,6 @@
   --color-warning: #FBBD23;
   --color-error: #F87272;
 }
-@plugin "@tailwindcss/typography";
 
 @theme {
   --font-display: "Satoshi", "sans-serif";
