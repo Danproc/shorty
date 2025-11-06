@@ -50,42 +50,47 @@ export default function DashboardOverview() {
             value={loading ? "..." : stats?.totalScans7Days || 0}
             loading={loading}
           />
-          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/40 md:col-span-2 lg:col-span-1">
-            <div className="card-body p-6">
-              <p className="text-sm text-base-content/70 font-semibold uppercase tracking-wide">Activity Trend (7 Days)</p>
+          <div className="card bg-base-100 hover:shadow-sm transition-all duration-200 rounded-lg border border-base-300 hover:border-primary/30 md:col-span-2 lg:col-span-1">
+            <div className="card-body p-4">
+              <p className="text-xs text-base-content/60 font-medium uppercase tracking-wide">Activity Trend (7 Days)</p>
               {loading ? (
-                <div className="skeleton h-32 w-full mt-3 rounded-lg"></div>
+                <div className="skeleton h-24 w-full mt-2 rounded-lg"></div>
               ) : (
-                <div className="mt-3 h-32">
+                <div className="mt-2 h-24">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={stats?.dailyActivity || []}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" strokeOpacity={0.3} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.06} />
                       <XAxis
                         dataKey="date"
-                        stroke="#6b7280"
-                        style={{ fontSize: '10px' }}
-                        tick={{ fill: '#6b7280' }}
+                        stroke="currentColor"
+                        strokeOpacity={0.2}
+                        style={{ fontSize: '9px' }}
+                        tick={{ fill: 'currentColor', opacity: 0.4 }}
+                        tickLine={false}
                       />
                       <YAxis
-                        stroke="#6b7280"
-                        style={{ fontSize: '10px' }}
-                        tick={{ fill: '#6b7280' }}
+                        stroke="currentColor"
+                        strokeOpacity={0.2}
+                        style={{ fontSize: '9px' }}
+                        tick={{ fill: 'currentColor', opacity: 0.4 }}
+                        tickLine={false}
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#ffffff',
-                          border: '2px solid #3ECF8E',
+                          backgroundColor: 'hsl(var(--b1))',
+                          border: '1px solid hsl(var(--bc) / 0.2)',
                           borderRadius: '0.5rem',
-                          fontSize: '12px'
+                          fontSize: '11px'
                         }}
                       />
                       <Line
                         type="monotone"
                         dataKey="count"
                         stroke="#3ECF8E"
-                        strokeWidth={2}
-                        dot={{ fill: '#3ECF8E', r: 3 }}
-                        activeDot={{ r: 5 }}
+                        strokeWidth={1.5}
+                        strokeOpacity={0.6}
+                        dot={false}
+                        activeDot={{ r: 3, strokeWidth: 0 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
