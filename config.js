@@ -35,7 +35,6 @@ const config = {
           },
           { name: "View & manage all QR codes" },
           { name: "Track all shortened URLs" },
-          { name: "Access all markdown files" },
           { name: "Detailed analytics & click tracking" },
           { name: "Unlimited asset management" },
         ],

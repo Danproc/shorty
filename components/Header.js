@@ -18,10 +18,6 @@ const links = [
     label: "QR Generator",
   },
   {
-    href: "/markdown",
-    label: "Markdown Converter",
-  },
-  {
     href: "/pricing",
     label: "Pricing",
   },
