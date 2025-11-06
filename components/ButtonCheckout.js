@@ -15,11 +15,16 @@ const ButtonCheckout = ({ priceId, mode = "subscription" }) => {
     setIsLoading(true);
 
     try {
+      // Use payment success page as success URL to handle webhook processing
+      const baseUrl = window.location.origin;
+      const successUrl = `${baseUrl}/payment/success`;
+      const cancelUrl = window.location.href;
+
       const res = await apiClient.post("/stripe/create-checkout", {
         priceId,
         mode,
-        successUrl: window.location.href,
-        cancelUrl: window.location.href,
+        successUrl,
+        cancelUrl,
       });
 
       window.location.href = res.url;
