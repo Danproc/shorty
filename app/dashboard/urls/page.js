@@ -80,47 +80,43 @@ export default function URLsPage() {
                 <p className="text-base-content/60">No shortened URLs yet. Create your first one!</p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Original URL</th>
-                      <th>Short URL</th>
-                      <th>Clicks</th>
-                      <th>Created</th>
-                      <th>Status</th>
-                      <th>Actions</th>
+              <div className="overflow-x-auto rounded-lg border border-base-300">
+                <table className="table w-full">
+                  <thead className="bg-base-200">
+                    <tr className="border-b border-base-300">
+                      <th className="font-semibold text-sm uppercase tracking-wide">Title</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Original URL</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Short URL</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Clicks</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Created</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Status</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {urls.map((url) => (
-                      <tr key={url.id}>
+                      <tr key={url.id} className="border-b border-base-200 hover:bg-base-100 transition-colors">
+                        <td className="font-medium">
+                          {url.title || 'Untitled'}
+                        </td>
                         <td>
-                          <div className="font-medium">
-                            {url.title || 'Untitled'}
-                          </div>
+                          <a
+                            href={url.original_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link link-primary truncate max-w-xs inline-block hover:underline"
+                          >
+                            {url.original_url}
+                          </a>
                         </td>
                         <td>
                           <div className="flex items-center gap-2">
-                            <a
-                              href={url.original_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="link link-primary truncate max-w-xs"
-                            >
-                              {url.original_url}
-                            </a>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="flex items-center gap-2">
-                            <code className="bg-base-200 px-2 py-1 rounded">
+                            <code className="bg-base-200 px-3 py-1.5 rounded-lg text-sm font-mono border border-base-300">
                               {window.location.origin}/{url.short_code}
                             </code>
                             <button
                               onClick={() => copyToClipboard(`${window.location.origin}/${url.short_code}`)}
-                              className="btn btn-ghost btn-xs"
+                              className="btn btn-ghost btn-sm rounded-lg hover:bg-base-200"
                               title="Copy to clipboard"
                             >
                               <svg
@@ -141,13 +137,13 @@ export default function URLsPage() {
                           </div>
                         </td>
                         <td>
-                          <div className="badge badge-ghost">
-                            {url.click_count || 0} clicks
+                          <div className="badge badge-ghost badge-lg rounded-lg">
+                            {url.click_count || 0}
                           </div>
                         </td>
-                        <td>{formatDate(url.created_at)}</td>
+                        <td className="text-sm text-base-content/70">{formatDate(url.created_at)}</td>
                         <td>
-                          <div className={`badge ${url.is_active ? 'badge-success' : 'badge-error'}`}>
+                          <div className={`badge badge-lg rounded-lg ${url.is_active ? 'badge-success' : 'badge-error'}`}>
                             {url.is_active ? 'Active' : 'Inactive'}
                           </div>
                         </td>
@@ -156,7 +152,7 @@ export default function URLsPage() {
                             href={`/${url.short_code}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn btn-ghost btn-xs"
+                            className="btn btn-sm btn-ghost rounded-lg hover:bg-base-200"
                           >
                             Visit
                           </a>

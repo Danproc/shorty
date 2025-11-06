@@ -57,39 +57,169 @@ const TOS = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: September 26, 2023
+          {`Last Updated: November 6, 2025
 
-Welcome to ShipFast!
+Welcome to Cuer.io!
 
-These Terms of Service ("Terms") govern your use of the ShipFast website at https://shipfa.st ("Website") and the services provided by ShipFast. By using our Website and services, you agree to these Terms.
+These Terms of Service ("Terms") govern your use of Cuer.io at https://cuer.io ("Service") and all related services. By accessing or using our Service, you agree to be bound by these Terms.
 
-1. Description of ShipFast
+1. Service Description
 
-ShipFast is a platform that offers a JavaScript code boilerplate to assist entrepreneurs in launching their startups more efficiently.
+Cuer.io is a URL shortening and QR code generation service. We provide:
 
-2. Ownership and Usage Rights
+- Free URL shortening with public access
+- Free QR code generation with public access
+- Premium dashboard access with analytics and asset management
+- Click and scan tracking
+- Custom titles and metadata for your links
 
-When you purchase a package from ShipFast, you gain the right to download and use the code provided for creating applications. You own the code you create but do not have the right to resell it. We offer a full refund within 7 days of purchase, as specified in our refund policy.
+2. Account and Registration
 
-3. User Data and Privacy
+2.1 Account Creation
 
-We collect and store user data, including name, email, and payment information, as necessary to provide our services. For details on how we handle your data, please refer to our Privacy Policy at https://shipfa.st/privacy-policy.
+To access premium features, you must create an account. You agree to:
 
-4. Non-Personal Data Collection
+- Provide accurate and complete information
+- Maintain the security of your account credentials
+- Notify us immediately of any unauthorized access
+- Be responsible for all activities under your account
 
-We use web cookies to collect non-personal data for the purpose of improving our services and user experience.
+2.2 Age Requirement
 
-5. Governing Law
+You must be at least 13 years old to use this Service.
 
-These Terms are governed by the laws of France.
+3. Acceptable Use Policy
 
-6. Updates to the Terms
+You agree NOT to use Cuer.io to:
 
-We may update these Terms from time to time. Users will be notified of any changes via email.
+- Share malicious, illegal, or harmful content
+- Distribute spam, phishing links, or malware
+- Violate intellectual property rights
+- Harass, threaten, or harm others
+- Circumvent our security measures
+- Create misleading or deceptive shortened URLs
+- Violate any applicable laws or regulations
 
-For any questions or concerns regarding these Terms of Service, please contact us at marc@shipfa.st.
+We reserve the right to suspend or terminate accounts that violate these policies.
 
-Thank you for using ShipFast!`}
+4. Premium Subscription
+
+4.1 Premium Features
+
+Premium subscribers gain access to:
+
+- Personal dashboard with full analytics
+- Management of all shortened URLs
+- Management of all generated QR codes
+- Detailed click and scan tracking
+- Unlimited asset management
+
+4.2 Payment and Billing
+
+- Premium subscriptions are billed through Stripe
+- Subscription fees are non-refundable except as required by law
+- You may cancel your subscription at any time
+- Upon cancellation, access to premium features ends at the end of the billing period
+
+4.3 Price Changes
+
+We reserve the right to modify subscription prices with 30 days notice to existing subscribers.
+
+5. Intellectual Property
+
+5.1 Service Content
+
+Cuer.io and its original content, features, and functionality are owned by Cuer.io and are protected by international copyright, trademark, and other intellectual property laws.
+
+5.2 Your Content
+
+You retain ownership of URLs and QR codes you create. By using our Service, you grant us a license to:
+
+- Store and display your shortened URLs and QR codes
+- Track analytics related to your links
+- Display aggregated, anonymized usage statistics
+
+6. Service Availability
+
+We strive to maintain 99.9% uptime but do not guarantee uninterrupted access. We reserve the right to:
+
+- Modify or discontinue features with notice
+- Perform maintenance and updates
+- Suspend service for security or legal reasons
+
+7. Termination
+
+We may suspend or terminate your account if you:
+
+- Violate these Terms
+- Engage in fraudulent activity
+- Create risk or legal exposure for Cuer.io
+- Request account deletion
+
+Upon termination, your right to use the Service ceases immediately.
+
+8. Disclaimer of Warranties
+
+The Service is provided "AS IS" and "AS AVAILABLE" without warranties of any kind. We do not warrant that:
+
+- The Service will be error-free or uninterrupted
+- Defects will be corrected
+- The Service is free of viruses or harmful components
+
+9. Limitation of Liability
+
+To the maximum extent permitted by law, Cuer.io shall not be liable for:
+
+- Indirect, incidental, or consequential damages
+- Loss of profits, data, or goodwill
+- Service interruptions or data loss
+- Third-party actions or content
+
+Our total liability shall not exceed the amount you paid for premium services in the past 12 months.
+
+10. Indemnification
+
+You agree to indemnify and hold Cuer.io harmless from any claims, damages, or expenses arising from:
+
+- Your use of the Service
+- Your violation of these Terms
+- Your violation of any third-party rights
+- Content you share through shortened URLs
+
+11. Privacy
+
+Your use of Cuer.io is also governed by our Privacy Policy, available at https://cuer.io/privacy-policy. Please review it to understand our data practices.
+
+12. Governing Law
+
+These Terms are governed by the laws of the United States. Any disputes shall be resolved in the courts of the jurisdiction where Cuer.io operates.
+
+13. Changes to Terms
+
+We may modify these Terms at any time. We will notify users of significant changes via:
+
+- Email to registered users
+- Notice on the Service
+- Updated "Last Updated" date
+
+Continued use after changes constitutes acceptance of modified Terms.
+
+14. Contact Information
+
+For questions or concerns about these Terms:
+
+Email: noreply@cuer.io
+Website: https://cuer.io
+
+15. Severability
+
+If any provision of these Terms is found unenforceable, the remaining provisions will continue in full effect.
+
+16. Entire Agreement
+
+These Terms, along with our Privacy Policy, constitute the entire agreement between you and Cuer.io regarding use of the Service.
+
+Thank you for using Cuer.io!`}
         </pre>
       </div>
     </main>

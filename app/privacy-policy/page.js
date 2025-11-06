@@ -57,51 +57,120 @@ const PrivacyPolicy = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: 2023-08-25
+          {`Last Updated: November 6, 2025
 
-Thank you for visiting ShipFast ("we," "us," or "our"). This Privacy Policy outlines how we collect, use, and protect your personal and non-personal information when you use our website located at https://shipfa.st (the "Website").
+Thank you for using Cuer.io ("we," "us," or "our"). This Privacy Policy explains how we collect, use, and protect your information when you use our URL shortening and QR code generation service at https://cuer.io (the "Service").
 
-By accessing or using the Website, you agree to the terms of this Privacy Policy. If you do not agree with the practices described in this policy, please do not use the Website.
+By using the Service, you agree to the terms of this Privacy Policy. If you do not agree with these practices, please do not use our Service.
 
 1. Information We Collect
 
-1.1 Personal Data
+1.1 Personal Information
 
-We collect the following personal information from you:
+We collect the following personal information:
 
-Name: We collect your name to personalize your experience and communicate with you effectively.
-Email: We collect your email address to send you important information regarding your orders, updates, and communication.
-Payment Information: We collect payment details to process your orders securely. However, we do not store your payment information on our servers. Payments are processed by trusted third-party payment processors.
+- Name: Used to personalize your dashboard and communications
+- Email Address: Used for account authentication, service notifications, and account management
+- Payment Information: Collected securely through Stripe to process premium subscriptions. We do not store your payment details on our servers.
 
-1.2 Non-Personal Data
+1.2 Service Data
 
-We may use web cookies and similar technologies to collect non-personal information such as your IP address, browser type, device information, and browsing patterns. This information helps us to enhance your browsing experience, analyze trends, and improve our services.
+When you use Cuer.io, we collect:
 
-2. Purpose of Data Collection
+- URLs you shorten and their associated metadata (titles, click counts)
+- QR codes you generate and their target URLs
+- Click and scan analytics data
+- Usage statistics and performance metrics
 
-We collect and use your personal data for the sole purpose of order processing. This includes processing your orders, sending order confirmations, providing customer support, and keeping you updated about the status of your orders.
+1.3 Non-Personal Data
 
-3. Data Sharing
+We automatically collect:
 
-We do not share your personal data with any third parties except as required for order processing (e.g., sharing your information with payment processors). We do not sell, trade, or rent your personal information to others.
+- IP addresses
+- Browser type and version
+- Device information
+- Referral sources
+- Cookies and similar tracking technologies
 
-4. Children's Privacy
+This data helps us improve the Service, analyze trends, and enhance your experience.
 
-ShipFast is not intended for children under the age of 13. We do not knowingly collect personal information from children. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us at the email address provided below.
+2. How We Use Your Information
 
-5. Updates to the Privacy Policy
+We use your information to:
 
-We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. Any updates will be posted on this page, and we may notify you via email about significant changes.
+- Provide and maintain the URL shortening and QR code generation services
+- Track analytics for your shortened URLs and QR codes
+- Process premium subscription payments
+- Send service-related notifications and updates
+- Improve and optimize our Service
+- Prevent fraud and ensure security
+- Comply with legal obligations
 
-6. Contact Information
+3. Data Sharing and Disclosure
 
-If you have any questions, concerns, or requests related to this Privacy Policy, you can contact us at:
+We do not sell, rent, or trade your personal information.
 
-Email: marc@shipfa.st
+We may share your information only in these circumstances:
 
-For all other inquiries, please visit our Contact Us page on the Website.
+- With Stripe for payment processing
+- With service providers who assist in operating our Service
+- When required by law or to protect our rights
+- In connection with a business transfer or acquisition
 
-By using ShipFast, you consent to the terms of this Privacy Policy.`}
+4. Data Security
+
+We implement industry-standard security measures to protect your information, including:
+
+- Encrypted data transmission (HTTPS)
+- Secure database storage with Supabase
+- Regular security audits
+- Access controls and authentication
+
+However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
+
+5. Your Rights
+
+You have the right to:
+
+- Access your personal data
+- Correct inaccurate information
+- Delete your account and associated data
+- Export your data
+- Opt-out of marketing communications
+
+To exercise these rights, contact us at the email below.
+
+6. Data Retention
+
+We retain your information for as long as your account is active or as needed to provide the Service. You may delete your account at any time, and we will remove your data within 30 days, except where required for legal compliance.
+
+7. Cookies
+
+We use cookies to:
+
+- Maintain your session
+- Remember your preferences
+- Analyze Service usage
+- Improve functionality
+
+You can control cookies through your browser settings, but this may affect Service functionality.
+
+8. Children's Privacy
+
+Cuer.io is not intended for users under 13 years of age. We do not knowingly collect information from children. If you believe a child has provided us with personal information, please contact us immediately.
+
+9. Changes to This Policy
+
+We may update this Privacy Policy periodically. We will notify you of significant changes via email or through the Service. Continued use of the Service after changes constitutes acceptance of the updated policy.
+
+10. Contact Us
+
+For questions, concerns, or requests regarding this Privacy Policy:
+
+Email: noreply@cuer.io
+Website: https://cuer.io
+
+By using Cuer.io, you consent to this Privacy Policy.`}
         </pre>
       </div>
     </main>
