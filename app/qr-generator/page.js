@@ -32,11 +32,11 @@ export default async function QRGeneratorPage() {
     hasAccess = userHasAccess;
   }
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Suspense>
         <Header />
       </Suspense>
-      <main className="flex items-center justify-center px-8 py-20">
+      <main className="flex-1 flex items-center justify-center px-8 py-20">
         <div className="max-w-3xl mx-auto w-full">
           {/* Header */}
           <div className="text-center mb-12">
@@ -115,6 +115,6 @@ export default async function QRGeneratorPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
