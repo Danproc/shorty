@@ -36,7 +36,7 @@ export default async function QRGeneratorPage() {
       <Suspense>
         <Header />
       </Suspense>
-      <main className="min-h-screen flex items-center justify-center px-8 py-20">
+      <main className="flex items-center justify-center px-8 py-20">
         <div className="max-w-3xl mx-auto w-full">
           {/* Header */}
           <div className="text-center mb-12">
