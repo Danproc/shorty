@@ -2,11 +2,19 @@ import { Suspense } from 'react'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QRCodeGeneratorForm from "@/components/QRCodeGeneratorForm";
+import { getSEOTags } from "@/libs/seo";
 
-export const metadata = {
-  title: "QR Code Generator - Create Free QR Codes",
-  description: "Free QR code generator. Create scannable QR codes for any text, URLs, phone numbers, emails, and more. Download as PNG or SVG.",
-};
+export const metadata = getSEOTags({
+  title: "Free QR Code Generator - Create QR Codes Online | Cuer.io",
+  description: "Free QR code generator to create scannable QR codes instantly. Generate QR codes for URLs, text, phone numbers, emails, WiFi, and more. Download as PNG or SVG. No signup required.",
+  keywords: ["qr code generator", "qr generator", "free qr code", "create qr code", "qr code maker", "generate qr code", "qr code online", "custom qr code", "qr code download"],
+  canonicalUrlRelative: "/qr-generator",
+  openGraph: {
+    title: "Free QR Code Generator - Create QR Codes Online | Cuer.io",
+    description: "Create scannable QR codes for any text, URLs, phone numbers, emails, and more. Download as PNG or SVG.",
+    url: "https://cuer.io/qr-generator",
+  },
+});
 
 export default function QRGeneratorPage() {
   return (

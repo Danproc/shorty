@@ -6,11 +6,19 @@ import Footer from "@/components/Footer";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { getSEOTags } from "@/libs/seo";
 
-export const metadata = {
-  title: `Pricing - ${config.appName}`,
-  description: "Subscribe to access your dashboard, analytics, and manage all your QR codes, URLs, and files in one place.",
-};
+export const metadata = getSEOTags({
+  title: `Pricing Plans - Dashboard Access & Analytics | ${config.appName}`,
+  description: "Free tools for everyone. Subscribe to unlock your personal dashboard with advanced analytics, asset management, and click tracking. Manage all your QR codes, URLs, and markdown files in one place.",
+  keywords: ["pricing", "subscription plans", "dashboard access", "qr code analytics", "url analytics", "link tracking", "premium features"],
+  canonicalUrlRelative: "/pricing",
+  openGraph: {
+    title: `Pricing Plans | ${config.appName}`,
+    description: "Subscribe to access your dashboard, analytics, and manage all your QR codes, URLs, and files in one place.",
+    url: "https://cuer.io/pricing",
+  },
+});
 
 export default async function PricingPage() {
   const supabase = await createClient();

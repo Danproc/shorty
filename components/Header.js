@@ -21,6 +21,10 @@ const links = [
     href: "/markdown",
     label: "Markdown Converter",
   },
+  {
+    href: "/pricing",
+    label: "Pricing",
+  },
 ];
 
 // A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
@@ -92,12 +96,12 @@ const Header = () => {
           </div>
 
           {/* Your links on large screens */}
-          <div className="hidden lg:flex lg:justify-center lg:gap-12 lg:items-center">
+          <div className="hidden lg:flex lg:justify-center lg:gap-3 lg:items-center">
             {links.map((link) => (
               <Link
                 href={link.href}
                 key={link.href}
-                className="link link-hover"
+                className="btn btn-ghost btn-sm rounded-lg hover:bg-primary/10 transition-colors"
                 title={link.label}
               >
                 {link.label}
@@ -107,28 +111,6 @@ const Header = () => {
 
           {/* CTA on large screens */}
           <div className="hidden lg:flex lg:justify-end lg:flex-1 lg:gap-3 lg:items-center">
-            {user && (
-              <Link
-                href="/dashboard"
-                className="btn btn-ghost btn-sm rounded-lg hover:bg-primary/10"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-                  />
-                </svg>
-                Dashboard
-              </Link>
-            )}
             {user ? <ButtonAccount /> : <ButtonSignin extraStyle="btn-primary" />}
           </div>
         </nav>
@@ -184,12 +166,12 @@ const Header = () => {
           {/* Your links on small screens */}
           <div className="flow-root mt-6">
             <div className="py-4">
-              <div className="flex flex-col gap-y-4 items-start">
+              <div className="flex flex-col gap-y-2 items-start">
                 {links.map((link) => (
                   <Link
                     href={link.href}
                     key={link.href}
-                    className="link link-hover"
+                    className="btn btn-ghost rounded-lg hover:bg-primary/10 justify-start w-full"
                     title={link.label}
                   >
                     {link.label}
@@ -200,28 +182,6 @@ const Header = () => {
             <div className="divider"></div>
             {/* Your CTA on small screens */}
             <div className="flex flex-col gap-3">
-              {user && (
-                <Link
-                  href="/dashboard"
-                  className="btn btn-ghost rounded-lg hover:bg-primary/10 justify-start"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-                    />
-                  </svg>
-                  Dashboard
-                </Link>
-              )}
               {user ? <ButtonAccount /> : <ButtonSignin extraStyle="btn-primary" />}
             </div>
           </div>
