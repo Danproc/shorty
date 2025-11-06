@@ -3,11 +3,11 @@ import { markdownToHtml, validateMarkdown } from '@/libs/markdown';
 
 /**
  * POST /api/markdown/convert
- * Convert markdown to sanitized HTML
+ * Convert markdown to sanitized HTML with options
  */
 export async function POST(req) {
   try {
-    const { markdown } = await req.json();
+    const { markdown, options } = await req.json();
 
     // Validate markdown input
     const validation = validateMarkdown(markdown);
@@ -18,12 +18,20 @@ export async function POST(req) {
       );
     }
 
-    // Convert markdown to HTML
-    const html = markdownToHtml(markdown);
+    // Convert markdown to HTML with options
+    const { html, renderTime, error } = markdownToHtml(markdown, options);
+
+    if (error) {
+      return NextResponse.json(
+        { error: error },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       html,
       markdown,
+      renderTime,
       success: true,
     });
   } catch (error) {
