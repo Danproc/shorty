@@ -22,12 +22,12 @@ const Hero = ({ hasAccess = false }) => {
             Create QR Codes and Shorten Links Instantly - 100% Free
           </p>
           <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
-            Professional free tools to generate QR codes, shorten URLs, and convert Markdown to HTML. No signup required. Fast, secure, and completely free forever.
+            Professional free tools to generate QR codes and shorten URLs. No signup required. Fast, secure, and completely free forever.
           </p>
         </header>
 
         {/* Tools Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {/* URL Shortener Tool */}
           <Link href="/shorten" className="group">
             <div className="card bg-base-200/80 backdrop-blur-sm hover:bg-base-300/80 border border-base-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(62,207,142,0.15)] transition-all duration-500 h-full relative overflow-hidden">
@@ -81,31 +81,6 @@ const Hero = ({ hasAccess = false }) => {
             </div>
           </Link>
 
-          {/* Markdown Converter Tool */}
-          <Link href="/markdown" className="group">
-            <div className="card bg-base-200/80 backdrop-blur-sm hover:bg-base-300/80 border border-base-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(62,207,142,0.15)] transition-all duration-500 h-full relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="card-body relative z-10">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300 shadow-lg shadow-primary/0 group-hover:shadow-primary/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-primary">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-                    </svg>
-                  </div>
-                  <h2 className="card-title text-2xl">Markdown to HTML</h2>
-                </div>
-                <p className="text-base-content/60 mb-4">
-                  Convert Markdown to clean HTML instantly with live preview.
-                </p>
-                <div className="flex items-center gap-2 text-sm text-primary group-hover:gap-3 transition-all duration-300">
-                  <span>Try it now</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </Link>
         </div>
 
         {/* Membership Sales Section - Only show if user doesn't have paid subscription */}

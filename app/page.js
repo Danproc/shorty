@@ -8,7 +8,7 @@ import { checkSubscription } from "@/libs/subscription";
 
 export const metadata = getSEOTags({
   title: "Free QR Code Generator & FREE URL Shortener - Cuer.io",
-  description: "Generate free QR codes and shorten URLs instantly. The best free QR code generator and URL shortener - no signup required. Create short links, QR codes, and convert markdown to HTML. 100% free forever.",
+  description: "Generate free QR codes and shorten URLs instantly. The best free QR code generator and URL shortener - no signup required. Create short links and QR codes. 100% free forever.",
   keywords: ["free qr code generator", "free url shortener", "qr code generator", "url shortener", "shorten url", "create qr code", "qr generator free", "link shortener", "free qr code", "short link generator", "qr code maker", "shorten link free"],
   canonicalUrlRelative: "/",
   openGraph: {
@@ -37,7 +37,7 @@ export default async function Home() {
     "@type": "WebApplication",
     "name": "Cuer.io - Free QR Code Generator & URL Shortener",
     "applicationCategory": "BusinessApplication",
-    "description": "Free online tools to generate QR codes, shorten URLs, and convert markdown to HTML. No signup required.",
+    "description": "Free online tools to generate QR codes and shorten URLs. No signup required.",
     "url": "https://cuer.io",
     "offers": {
       "@type": "Offer",

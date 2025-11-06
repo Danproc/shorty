@@ -43,9 +43,6 @@ const Footer = () => {
                 <Link href="/qr-generator" className="link link-hover">
                   QR Generator
                 </Link>
-                <Link href="/markdown" className="link link-hover">
-                  Markdown to HTML
-                </Link>
               </div>
             </div>
 
