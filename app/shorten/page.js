@@ -2,11 +2,19 @@ import { Suspense } from 'react'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import URLShortenerForm from "@/components/URLShortenerForm";
+import { getSEOTags } from "@/libs/seo";
 
-export const metadata = {
-  title: "URL Shortener - Create Short Links",
-  description: "Free URL shortener tool. Create short, memorable links instantly. No signup required.",
-};
+export const metadata = getSEOTags({
+  title: "Free URL Shortener - Create Short Links Instantly | Cuer.io",
+  description: "Free URL shortener tool to create short, memorable links instantly. Shorten long URLs, track clicks, and share easily. No signup required. Fast and secure link shortening.",
+  keywords: ["url shortener", "shorten url", "short link", "link shortener", "free url shortener", "tiny url", "custom short link", "link tracking", "shorten link"],
+  canonicalUrlRelative: "/shorten",
+  openGraph: {
+    title: "Free URL Shortener - Create Short Links | Cuer.io",
+    description: "Transform long URLs into short, memorable links. Free, fast, and no signup required.",
+    url: "https://cuer.io/shorten",
+  },
+});
 
 export default function ShortenPage() {
   return (
