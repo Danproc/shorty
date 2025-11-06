@@ -133,11 +133,11 @@ export default async function PricingPage() {
               Subscribe to unlock your personal dashboard with advanced features
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="flex justify-center max-w-3xl mx-auto">
               {config.stripe.plans.map((plan) => (
                 <div
                   key={plan.priceId}
-                  className={`card bg-base-100 shadow-xl ${
+                  className={`card bg-base-100 shadow-xl w-full ${
                     plan.isFeatured ? "ring-2 ring-primary" : ""
                   }`}
                 >
