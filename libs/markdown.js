@@ -3,11 +3,12 @@ import DOMPurify from 'isomorphic-dompurify';
 
 /**
  * Configure marked with secure defaults
+ * Produces clean HTML without IDs or classes for Word-friendly output
  */
 marked.setOptions({
   gfm: true, // GitHub Flavored Markdown
   breaks: true, // Convert line breaks to <br>
-  headerIds: true, // Add IDs to headers
+  headerIds: false, // Don't add IDs to headers for clean HTML
   mangle: false, // Don't mangle email addresses
 });
 
@@ -26,6 +27,7 @@ export function markdownToHtml(markdown) {
     const rawHtml = marked.parse(markdown);
 
     // Sanitize HTML to prevent XSS attacks
+    // Only allow semantic attributes (no classes or IDs) for clean, Word-friendly HTML
     const cleanHtml = DOMPurify.sanitize(rawHtml, {
       ALLOWED_TAGS: [
         'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -36,7 +38,7 @@ export function markdownToHtml(markdown) {
         'table', 'thead', 'tbody', 'tr', 'th', 'td',
         'img',
       ],
-      ALLOWED_ATTR: ['href', 'title', 'alt', 'src', 'class', 'id'],
+      ALLOWED_ATTR: ['href', 'title', 'alt', 'src'], // Removed 'class' and 'id' for clean HTML
       ALLOW_DATA_ATTR: false,
     });
 

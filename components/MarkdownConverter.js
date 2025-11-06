@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -10,6 +10,7 @@ export default function MarkdownConverter() {
   const [markdown, setMarkdown] = useState('# Hello, Markdown!\n\nStart typing your **markdown** here...');
   const [html, setHtml] = useState('');
   const [activeTab, setActiveTab] = useState('editor');
+  const previewRef = useRef(null);
 
   // Auto-convert markdown to HTML whenever markdown changes
   useEffect(() => {
@@ -54,6 +55,43 @@ export default function MarkdownConverter() {
     }
   };
 
+  const handleCopyFormatted = async () => {
+    try {
+      // Use the clean HTML from the API (which has no classes/IDs)
+      if (!html.trim()) {
+        toast.error('No content to copy');
+        return;
+      }
+
+      // Create a ClipboardItem with both HTML and plain text formats
+      // This ensures it pastes cleanly into Word with proper formatting
+      const htmlBlob = new Blob([html], { type: 'text/html' });
+      const textBlob = new Blob([markdown], { type: 'text/plain' });
+
+      const clipboardItem = new ClipboardItem({
+        'text/html': htmlBlob,
+        'text/plain': textBlob,
+      });
+
+      await navigator.clipboard.write([clipboardItem]);
+      toast.success('Formatted HTML copied! Paste into Word to preserve formatting.');
+
+      // Track event in PostHog
+      trackEvent('MD Converted', {
+        output_type: 'formatted-html',
+      });
+    } catch (error) {
+      console.error('Error copying formatted HTML:', error);
+      // Fallback to copying just the HTML code if the Clipboard API fails
+      try {
+        await navigator.clipboard.writeText(html);
+        toast.success('HTML copied (fallback mode)');
+      } catch (fallbackError) {
+        toast.error('Failed to copy formatted HTML');
+      }
+    }
+  };
+
   const handleClear = () => {
     setMarkdown('');
     setHtml('');
@@ -66,7 +104,7 @@ export default function MarkdownConverter() {
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-2">Markdown to HTML Converter</h1>
         <p className="text-base-content/70">
-          Convert your markdown to clean, sanitized HTML instantly
+          Convert markdown to clean, Word-friendly HTML - paste directly into documents with perfect formatting
         </p>
       </div>
 
@@ -107,18 +145,32 @@ export default function MarkdownConverter() {
               : **bold**, *italic*, [links](url), # headers, lists, code blocks, and more
             </div>
 
-            <div className="card-actions justify-between items-center mt-4">
-              <button
-                onClick={() => handleCopy(html, 'HTML')}
-                className="btn btn-primary"
-                disabled={!html.trim()}
-              >
-                Copy HTML
-              </button>
+            <div className="card-actions flex-col space-y-2 mt-4">
+              <div className="flex gap-2 w-full">
+                <button
+                  onClick={handleCopyFormatted}
+                  className="btn btn-primary flex-1"
+                  disabled={!html.trim()}
+                  title="Copy formatted HTML that pastes cleanly into Word"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Copy for Word
+                </button>
+                <button
+                  onClick={() => handleCopy(html, 'HTML')}
+                  className="btn btn-outline flex-1"
+                  disabled={!html.trim()}
+                  title="Copy HTML code"
+                >
+                  Copy HTML Code
+                </button>
+              </div>
 
               <button
                 onClick={() => handleCopy(markdown, 'Markdown')}
-                className="btn btn-ghost btn-sm"
+                className="btn btn-ghost btn-sm w-full"
                 disabled={!markdown.trim()}
               >
                 Copy Markdown
@@ -149,6 +201,7 @@ export default function MarkdownConverter() {
             {/* Preview Tab */}
             {activeTab === 'editor' && (
               <div
+                ref={previewRef}
                 className="prose prose-sm max-w-none p-4 border border-base-300 rounded-lg bg-base-200/50 overflow-auto"
                 style={{ minHeight: '400px' }}
               >
