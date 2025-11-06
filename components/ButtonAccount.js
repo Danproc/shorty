@@ -54,23 +54,23 @@ const ButtonAccount = () => {
 		<Popover className="relative z-10">
 			{({ open }) => (
 				<>
-					<Popover.Button className="btn">
+					<Popover.Button className="btn btn-ghost rounded-full gap-2 hover:bg-base-200 transition-colors">
 						{user?.user_metadata?.avatar_url ? (
 							<img
 								src={user?.user_metadata?.avatar_url}
 								alt={"Profile picture"}
-								className="w-6 h-6 rounded-full shrink-0"
+								className="w-8 h-8 rounded-full shrink-0"
 								referrerPolicy="no-referrer"
-								width={24}
-								height={24}
+								width={32}
+								height={32}
 							/>
 						) : (
-							<span className="w-8 h-8 bg-base-100 flex justify-center items-center rounded-full shrink-0 capitalize">
+							<span className="w-8 h-8 bg-primary/10 flex justify-center items-center rounded-full shrink-0 capitalize text-primary font-semibold">
 								{user?.email?.charAt(0)}
 							</span>
 						)}
 
-						Dashboard
+						<span className="font-medium">Dashboard</span>
 
 						{isLoading ? (
 							<span className="loading loading-spinner loading-xs"></span>

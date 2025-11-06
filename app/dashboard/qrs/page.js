@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/libs/supabase/client";
+import { QRCodeCanvas } from "qrcode.react";
+import toast from "react-hot-toast";
 
 export default function QRsPage() {
   const [qrCodes, setQrCodes] = useState([]);
@@ -52,8 +54,30 @@ export default function QRsPage() {
     navigator.clipboard.writeText(text);
   };
 
+  const downloadQRCode = (qrCode, targetUrl) => {
+    try {
+      const canvas = document.getElementById(`qr-canvas-${qrCode}`);
+      if (!canvas) {
+        toast.error('Failed to download QR code');
+        return;
+      }
+
+      const url = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `qr-code-${qrCode}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast.success('QR code downloaded!');
+    } catch (error) {
+      console.error('Download error:', error);
+      toast.error('Failed to download QR code');
+    }
+  };
+
   return (
-    <main className="min-h-screen p-4 md:p-8 pb-24 bg-base-200">
+    <main className="p-4 md:p-8 pb-24 bg-base-200">
       <section className="max-w-7xl mx-auto space-y-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold">QR Codes</h1>
@@ -146,14 +170,45 @@ export default function QRsPage() {
                         </td>
                         <td>{formatDate(qr.created_at)}</td>
                         <td>
-                          <a
-                            href={`/q/${qr.qr_code}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-ghost btn-xs"
-                          >
-                            View
-                          </a>
+                          <div className="flex gap-2">
+                            <Link
+                              href={`/qr-generator?url=${encodeURIComponent(qr.target_url)}&title=${encodeURIComponent(qr.title || '')}`}
+                              className="btn btn-ghost btn-xs"
+                              title="View QR code"
+                            >
+                              View
+                            </Link>
+                            <button
+                              onClick={() => downloadQRCode(qr.qr_code, qr.target_url)}
+                              className="btn btn-ghost btn-xs"
+                              title="Download QR code"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={1.5}
+                                stroke="currentColor"
+                                className="w-4 h-4"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
+                                />
+                              </svg>
+                            </button>
+                            {/* Hidden canvas for QR code generation */}
+                            <div style={{ display: 'none' }}>
+                              <QRCodeCanvas
+                                id={`qr-canvas-${qr.qr_code}`}
+                                value={`${window.location.origin}/q/${qr.qr_code}`}
+                                size={512}
+                                level="M"
+                                includeMargin={true}
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     ))}

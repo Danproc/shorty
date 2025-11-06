@@ -22,13 +22,13 @@ export default async function LayoutPrivate({ children }) {
   }
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
       <DashboardNav />
-      <div className="lg:pl-64">
+      <div className="flex-1 lg:pl-64">
         {children}
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
