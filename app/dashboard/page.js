@@ -42,7 +42,7 @@ export default async function Dashboard() {
             Dashboard
           </h1>
           <p className="text-base-content/70">
-            Welcome back! Here's an overview of your assets.
+            Welcome back! Here&apos;s an overview of your assets.
           </p>
         </div>
 

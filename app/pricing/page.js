@@ -254,7 +254,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="collapse-content">
                   <p>
-                    A subscription unlocks your personal dashboard where you can view, manage, and analyze all your QR codes, shortened URLs, and markdown files in one place. You'll get detailed analytics, click tracking, and easy asset management.
+                    A subscription unlocks your personal dashboard where you can view, manage, and analyze all your QR codes, shortened URLs, and markdown files in one place. You&apos;ll get detailed analytics, click tracking, and easy asset management.
                   </p>
                 </div>
               </div>
@@ -266,7 +266,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="collapse-content">
                   <p>
-                    Yes! You can cancel your subscription at any time from your billing settings. You'll continue to have access until the end of your billing period. Your generated QR codes and URLs will continue to work even after cancellation.
+                    Yes! You can cancel your subscription at any time from your billing settings. You&apos;ll continue to have access until the end of your billing period. Your generated QR codes and URLs will continue to work even after cancellation.
                   </p>
                 </div>
               </div>
@@ -278,7 +278,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="collapse-content">
                   <p>
-                    All your QR codes, shortened URLs, and markdown files will continue to work forever, even if you cancel your subscription. You'll just lose access to the dashboard and analytics features.
+                    All your QR codes, shortened URLs, and markdown files will continue to work forever, even if you cancel your subscription. You&apos;ll just lose access to the dashboard and analytics features.
                   </p>
                 </div>
               </div>
