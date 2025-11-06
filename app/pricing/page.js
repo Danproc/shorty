@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ButtonCheckout from "@/components/ButtonCheckout";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: `Pricing - ${config.appName}`,
@@ -21,6 +22,11 @@ export default async function PricingPage() {
   let profile = null;
   if (user) {
     profile = await getUserProfile(user.id);
+
+    // If user has an active subscription, redirect to dashboard
+    if (profile?.has_access) {
+      redirect("/dashboard");
+    }
   }
 
   return (
