@@ -1,14 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createClient } from '@/libs/supabase/client';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 import QRCodeDisplay from './QRCodeDisplay';
+import { trackEvent } from '@/libs/posthog/client';
 
 export default function QRCodeGeneratorForm() {
   const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  const checkAuth = async () => {
+    const supabase = createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    setIsLoggedIn(!!user);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const trimmedText = text.trim();
@@ -24,13 +40,54 @@ export default function QRCodeGeneratorForm() {
       return;
     }
 
-    setResult({ text: trimmedText });
-    toast.success('QR Code generated successfully!');
+    setLoading(true);
+
+    try {
+      // If logged in, save to database
+      if (isLoggedIn) {
+        const response = await axios.post('/api/qr/create', {
+          targetUrl: trimmedText,
+          title: title.trim() || undefined,
+        });
+
+        if (response.data.success) {
+          setResult({
+            text: trimmedText,
+            saved: true,
+            id: response.data.data.id,
+            qrCode: response.data.data.qrCode,
+          });
+          toast.success('QR Code created and saved!');
+
+          // Track event in PostHog
+          trackEvent('Asset Created', {
+            kind: 'qr_code',
+            has_title: !!title,
+          });
+        }
+      } else {
+        // Anonymous user - just display
+        setResult({ text: trimmedText, saved: false });
+        toast.success('QR Code generated! Sign in to save and track scans.');
+
+        // Track event in PostHog
+        trackEvent('Asset Created', {
+          kind: 'qr_code',
+          anonymous: true,
+        });
+      }
+    } catch (error) {
+      console.error('Error creating QR code:', error);
+      toast.error('Failed to create QR code');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
     setResult(null);
     setText('');
+    setTitle('');
   };
 
   return (
@@ -48,6 +105,7 @@ export default function QRCodeGeneratorForm() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               maxLength={2000}
+              disabled={loading}
             />
             <label className="label">
               <span className="label-text-alt text-base-content/60">
@@ -56,12 +114,38 @@ export default function QRCodeGeneratorForm() {
             </label>
           </div>
 
+          {/* Title Input (for logged-in users) */}
+          {isLoggedIn && (
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Title (optional)</span>
+              </label>
+              <input
+                type="text"
+                placeholder="My QR Code"
+                className="input input-bordered w-full"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                disabled={loading}
+                maxLength={100}
+              />
+            </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
             className="btn btn-primary w-full"
+            disabled={loading}
           >
-            Generate QR Code
+            {loading ? (
+              <>
+                <span className="loading loading-spinner"></span>
+                Generating...
+              </>
+            ) : (
+              'Generate QR Code'
+            )}
           </button>
         </form>
       ) : (

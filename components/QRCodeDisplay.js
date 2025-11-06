@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react';
 import { downloadQRCode, downloadQRCodeSVG, getQRCodeOptions } from '@/libs/qrcode';
 import toast from 'react-hot-toast';
+import { trackEvent } from '@/libs/posthog/client';
 
 export default function QRCodeDisplay({ url, shortCode }) {
   const [qrFormat, setQrFormat] = useState('canvas'); // 'canvas' or 'svg'
@@ -32,6 +33,12 @@ export default function QRCodeDisplay({ url, shortCode }) {
         downloadQRCodeSVG(shortCode);
       }
       toast.success('QR code downloaded!');
+
+      // Track event in PostHog
+      trackEvent('QR Downloaded', {
+        format: qrFormat === 'canvas' ? 'png' : 'svg',
+        short_code: shortCode,
+      });
     } catch (error) {
       toast.error('Failed to download QR code');
       console.error('Download error:', error);
