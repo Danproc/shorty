@@ -102,6 +102,24 @@ const ButtonAccount = () => {
 						<Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-[16rem] transform">
 							<div className="overflow-hidden rounded-xl shadow-xl ring-1 ring-base-content/10 bg-base-100 p-1">
 								<div className="space-y-0.5 text-sm">
+									<a
+										href="/dashboard"
+										className="flex items-center gap-2 text-base-content hover:bg-base-200 hover:text-base-content duration-200 py-1.5 px-4 w-full rounded-lg font-medium transition-colors"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 20 20"
+											fill="currentColor"
+											className="w-5 h-5"
+										>
+											<path
+												fillRule="evenodd"
+												d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z"
+												clipRule="evenodd"
+											/>
+										</svg>
+										Visit Dashboard
+									</a>
 									<button
 										className="flex items-center gap-2 text-base-content hover:bg-base-200 hover:text-base-content duration-200 py-1.5 px-4 w-full rounded-lg font-medium transition-colors"
 										onClick={handleBilling}

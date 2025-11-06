@@ -16,7 +16,7 @@ const Footer = () => {
               className="flex gap-2 justify-center md:justify-start items-center group"
             >
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <span className="text-xl font-bold text-primary">S</span>
+                <span className="text-xl font-bold text-primary">Q</span>
               </div>
               <strong className="font-extrabold tracking-tight text-lg">
                 {config.appName}
