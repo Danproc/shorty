@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import { getSEOTags } from "@/libs/seo";
+import { createClient } from "@/libs/supabase/server";
+import { checkSubscription } from "@/libs/subscription";
 
 export const metadata = getSEOTags({
   title: "Cuer.io - Free URL Shortener, QR Code Generator & Markdown Converter",
@@ -16,14 +18,26 @@ export const metadata = getSEOTags({
   },
 });
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let hasAccess = false;
+  if (user) {
+    const { hasAccess: userHasAccess } = await checkSubscription(user.id);
+    hasAccess = userHasAccess;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Suspense>
         <Header />
       </Suspense>
       <main className="flex-1">
-        <Hero />
+        <Hero hasAccess={hasAccess} />
       </main>
       <Footer />
     </div>
