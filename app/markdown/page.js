@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import MarkdownConverter from '@/components/MarkdownConverter';
 
 export const metadata = {
-  title: 'Markdown to HTML Converter | Shorty',
+  title: 'Markdown to HTML Converter | Cuer.io',
   description: 'Convert your markdown to clean, sanitized HTML instantly. Supports GitHub Flavored Markdown with live preview.',
 };
 

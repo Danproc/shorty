@@ -1,6 +1,6 @@
 const config = {
   // REQUIRED
-  appName: "Shorty",
+  appName: "Cuer.io",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     "Free URL shortener and QR code generator. Create short links and beautiful QR codes instantly.",
@@ -70,9 +70,9 @@ const config = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `ShipFast <noreply@resend.shipfa.st>`,
+    fromNoReply: `Cuer.io <noreply@resend.shipfa.st>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Marc at ShipFast <marc@resend.shipfa.st>`,
+    fromAdmin: `Cuer.io <marc@resend.shipfa.st>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
     supportEmail: "marc.louvion@gmail.com",
   },
