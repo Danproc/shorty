@@ -156,7 +156,7 @@ export default function AssetDetailPage({ assetId, assetType }) {
         {/* Top Referrers and Recent Activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Top Referrers */}
-          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30">
             <div className="card-body p-6">
               <h2 className="card-title text-2xl font-bold mb-6">Top Referrers</h2>
               <div className="h-64">
@@ -181,13 +181,13 @@ export default function AssetDetailPage({ assetId, assetType }) {
           </div>
 
           {/* Recent Activity */}
-          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30">
             <div className="card-body p-6">
               <h2 className="card-title text-2xl font-bold mb-6">Recent Activity</h2>
               <div className="overflow-x-auto">
                 <table className="table table-sm">
                   <thead>
-                    <tr className="border-b-2 border-base-300">
+                    <tr className="border-b-2 border-primary/20">
                       <th className="font-bold text-base-content">Time</th>
                       <th className="font-bold text-base-content">Referrer</th>
                       <th className="font-bold text-base-content">Country</th>

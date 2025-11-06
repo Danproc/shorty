@@ -50,7 +50,7 @@ export default function DashboardOverview() {
             value={loading ? "..." : stats?.totalScans7Days || 0}
             loading={loading}
           />
-          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300 hover:border-primary/30 md:col-span-2 lg:col-span-1">
+          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/40 md:col-span-2 lg:col-span-1">
             <div className="card-body p-6">
               <p className="text-sm text-base-content/70 font-semibold uppercase tracking-wide">Activity Trend (7 Days)</p>
               {loading ? (
@@ -96,7 +96,7 @@ export default function DashboardOverview() {
         </div>
 
         {/* Asset Breakdown */}
-        <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+        <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30">
           <div className="card-body p-6">
             <div className="flex justify-between items-center mb-6">
               <h2 className="card-title text-2xl font-bold">Your Assets</h2>
@@ -106,7 +106,7 @@ export default function DashboardOverview() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-base-300 hover:border-primary/20 transition-all hover:shadow-md">
+              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-primary/15 hover:border-primary/30 transition-all hover:shadow-md">
                 <div className="stat-title text-base-content/70 font-semibold uppercase text-xs tracking-wide">Short URLs</div>
                 <div className="stat-value text-3xl text-base-content font-extrabold mt-2">
                   {loading ? "..." : stats?.urlsCount || 0}
@@ -118,7 +118,7 @@ export default function DashboardOverview() {
                 </div>
               </div>
 
-              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-base-300 hover:border-primary/20 transition-all hover:shadow-md">
+              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-primary/15 hover:border-primary/30 transition-all hover:shadow-md">
                 <div className="stat-title text-base-content/70 font-semibold uppercase text-xs tracking-wide">QR Codes</div>
                 <div className="stat-value text-3xl text-base-content font-extrabold mt-2">
                   {loading ? "..." : stats?.qrCount || 0}
@@ -130,7 +130,7 @@ export default function DashboardOverview() {
                 </div>
               </div>
 
-              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-base-300 hover:border-primary/20 transition-all hover:shadow-md">
+              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-primary/15 hover:border-primary/30 transition-all hover:shadow-md">
                 <div className="stat-title text-base-content/70 font-semibold uppercase text-xs tracking-wide">MD Files</div>
                 <div className="stat-value text-3xl text-base-content font-extrabold mt-2">
                   {loading ? "..." : stats?.markdownCount || 0}
@@ -146,7 +146,7 @@ export default function DashboardOverview() {
         </div>
 
         {/* Quick Actions */}
-        <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+        <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30">
           <div className="card-body p-6">
             <h2 className="card-title text-2xl font-bold mb-6">Quick Actions</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

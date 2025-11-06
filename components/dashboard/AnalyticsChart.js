@@ -48,7 +48,7 @@ export default function AnalyticsChart({ assetId, assetType, analytics, loading 
 
   if (loading) {
     return (
-      <div className="card bg-base-100 shadow-lg rounded-xl border-2 border-base-300">
+      <div className="card bg-base-100 shadow-lg rounded-xl border-2 border-primary/20">
         <div className="card-body p-6">
           <div className="skeleton h-8 w-64 mb-4"></div>
           <div className="skeleton h-80 w-full"></div>
@@ -58,7 +58,7 @@ export default function AnalyticsChart({ assetId, assetType, analytics, loading 
   }
 
   return (
-    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30">
       <div className="card-body p-6">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-6 gap-4">
           <div>
@@ -135,7 +135,7 @@ export default function AnalyticsChart({ assetId, assetType, analytics, loading 
         </div>
 
         {/* Summary Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t-2 border-base-300">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t-2 border-primary/20">
           <div className="text-center">
             <p className="text-xs text-base-content/60 uppercase font-semibold tracking-wide">Total Visits</p>
             <p className="text-2xl font-bold text-primary mt-1">

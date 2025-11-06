@@ -2,7 +2,7 @@
 
 export default function KPICard({ title, value, change, icon, loading = false }) {
   return (
-    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300 hover:border-primary/30">
+    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/40">
       <div className="card-body p-6">
         <div className="flex items-start justify-between">
           <div className="flex-1">
