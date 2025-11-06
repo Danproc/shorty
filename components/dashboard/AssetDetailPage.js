@@ -155,7 +155,7 @@ export default function AssetDetailPage({ assetId, assetType }) {
               onClick={() => copyToClipboard(getAssetUrl())}
               className="btn btn-primary gap-2"
             >
-              📋 Copy Link
+              Copy Link
             </button>
           )}
         </div>
@@ -165,22 +165,18 @@ export default function AssetDetailPage({ assetId, assetType }) {
           <KPICard
             title="Total Scans"
             value={analytics?.totalScans || 0}
-            icon="👁️"
           />
           <KPICard
             title="Unique Visitors"
             value={analytics?.uniqueVisitors || 0}
-            icon="👤"
           />
           <KPICard
             title="First Scan"
             value={analytics?.firstScan ? new Date(analytics.firstScan).toLocaleDateString() : "Never"}
-            icon="📅"
           />
           <KPICard
             title="Last Scan"
             value={analytics?.lastScan ? new Date(analytics.lastScan).toLocaleDateString() : "Never"}
-            icon="🕒"
           />
         </div>
 
