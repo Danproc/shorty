@@ -22,16 +22,25 @@ export const metadata = getSEOTags({
 });
 
 export default async function MarkdownPage() {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  let user = null;
   let hasAccess = false;
-  if (user) {
-    const { hasAccess: userHasAccess } = await checkSubscription(user.id);
-    hasAccess = userHasAccess;
+
+  // Only try to get user if Supabase is configured
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    try {
+      const supabase = await createClient();
+      const {
+        data: { user: authUser },
+      } = await supabase.auth.getUser();
+      user = authUser;
+
+      if (user) {
+        const { hasAccess: userHasAccess } = await checkSubscription(user.id);
+        hasAccess = userHasAccess;
+      }
+    } catch (error) {
+      console.error('Error getting user:', error);
+    }
   }
   return (
     <div className="min-h-screen flex flex-col">
