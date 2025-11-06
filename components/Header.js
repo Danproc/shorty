@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ButtonSignin from "./ButtonSignin";
+import ButtonAccount from "./ButtonAccount";
 import config from "@/config";
+import { createClient } from "@/libs/supabase/client";
 
 const links = [
   {
@@ -21,18 +23,28 @@ const links = [
   },
 ];
 
-const cta = <ButtonSignin extraStyle="btn-primary" />;
-
 // A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
 // The header is responsive, and on mobile, the links are hidden behind a burger button.
 const Header = () => {
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const supabase = createClient();
 
   // setIsOpen(false) when the route changes (i.e: when the user clicks on a link on mobile)
   useEffect(() => {
     setIsOpen(false);
   }, [searchParams]);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    getUser();
+  }, [supabase]);
 
   return (
     <>
@@ -49,7 +61,7 @@ const Header = () => {
               title={`${config.appName} homepage`}
             >
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <span className="text-xl font-bold text-primary">S</span>
+                <span className="text-xl font-bold text-primary">Q</span>
               </div>
               <span className="font-extrabold text-lg">{config.appName}</span>
             </Link>
@@ -94,7 +106,9 @@ const Header = () => {
           </div>
 
           {/* CTA on large screens */}
-          <div className="hidden lg:flex lg:justify-end lg:flex-1">{cta}</div>
+          <div className="hidden lg:flex lg:justify-end lg:flex-1">
+            {user ? <ButtonAccount /> : <ButtonSignin extraStyle="btn-primary" />}
+          </div>
         </nav>
       </header>
 
@@ -118,7 +132,7 @@ const Header = () => {
               href="/"
             >
               <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <span className="text-xl font-bold text-primary">S</span>
+                <span className="text-xl font-bold text-primary">Q</span>
               </div>
               <span className="font-extrabold text-lg">{config.appName}</span>
             </Link>
@@ -163,7 +177,9 @@ const Header = () => {
             </div>
             <div className="divider"></div>
             {/* Your CTA on small screens */}
-            <div className="flex flex-col">{cta}</div>
+            <div className="flex flex-col">
+              {user ? <ButtonAccount /> : <ButtonSignin extraStyle="btn-primary" />}
+            </div>
           </div>
         </div>
       </div>

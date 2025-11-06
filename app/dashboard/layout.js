@@ -3,6 +3,7 @@ import { createClient } from "@/libs/supabase/server";
 import config from "@/config";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import DashboardNav from "@/components/dashboard/DashboardNav";
 
 // This is a server-side component to ensure the user is logged in.
 // If not, it will redirect to the login page.
@@ -23,7 +24,10 @@ export default async function LayoutPrivate({ children }) {
   return (
     <>
       <Header />
-      {children}
+      <DashboardNav />
+      <div className="lg:pl-64">
+        {children}
+      </div>
       <Footer />
     </>
   );

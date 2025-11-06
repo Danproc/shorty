@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-// Shorty - Landing page hero section with animated backgrounds and tool cards
+// Cuer.io - Landing page hero section with animated backgrounds and tool cards
 const Hero = () => {
   return (
     <section className="flex items-center justify-center px-8 py-20 relative overflow-hidden md:min-h-[85vh]">
@@ -16,7 +16,7 @@ const Hero = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="font-bold text-6xl lg:text-8xl tracking-tight mb-6 bg-gradient-to-br from-base-content to-base-content/60 bg-clip-text text-transparent">
-            Shorty
+            Cuer.io
           </h1>
           <p className="text-2xl lg:text-3xl text-primary font-semibold mb-4">
             Simple tools for the modern web
