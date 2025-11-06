@@ -28,18 +28,18 @@ export default function DashboardOverview() {
   };
 
   return (
-    <main className="p-4 md:p-8 pb-24 bg-base-200">
-      <section className="max-w-7xl mx-auto space-y-6">
+    <main className="p-8 pb-24 bg-base-200 min-h-screen">
+      <section className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-3xl md:text-4xl font-extrabold">Analytics</h1>
-          <p className="text-base-content/70 mt-1">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-2">Analytics</h1>
+          <p className="text-base-content/70">
             Track your links, QR codes, and conversions
           </p>
         </div>
 
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <KPICard
             title="Total Assets"
             value={loading ? "..." : stats?.totalAssets || 0}
@@ -50,47 +50,45 @@ export default function DashboardOverview() {
             value={loading ? "..." : stats?.totalScans7Days || 0}
             loading={loading}
           />
-          <div className="card bg-base-100 hover:shadow-sm transition-all duration-200 rounded-lg border border-base-300 hover:border-primary/30 md:col-span-2 lg:col-span-1">
-            <div className="card-body p-4">
-              <p className="text-xs text-base-content/60 font-medium uppercase tracking-wide">Activity Trend (7 Days)</p>
+          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30 md:col-span-2 lg:col-span-1">
+            <div className="card-body p-6">
+              <p className="text-xs text-base-content/60 font-semibold uppercase tracking-wide">Activity Trend (7 Days)</p>
               {loading ? (
                 <div className="skeleton h-24 w-full mt-2 rounded-lg"></div>
               ) : (
                 <div className="mt-2 h-24">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={stats?.dailyActivity || []}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="currentColor" strokeOpacity={0.06} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" strokeOpacity={0.5} />
                       <XAxis
                         dataKey="date"
-                        stroke="currentColor"
-                        strokeOpacity={0.2}
-                        style={{ fontSize: '9px' }}
-                        tick={{ fill: 'currentColor', opacity: 0.4 }}
+                        stroke="#6b7280"
+                        style={{ fontSize: '10px' }}
+                        tick={{ fill: '#6b7280' }}
                         tickLine={false}
                       />
                       <YAxis
-                        stroke="currentColor"
-                        strokeOpacity={0.2}
-                        style={{ fontSize: '9px' }}
-                        tick={{ fill: 'currentColor', opacity: 0.4 }}
+                        stroke="#6b7280"
+                        style={{ fontSize: '10px' }}
+                        tick={{ fill: '#6b7280' }}
                         tickLine={false}
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: 'hsl(var(--b1))',
-                          border: '1px solid hsl(var(--bc) / 0.2)',
-                          borderRadius: '0.5rem',
-                          fontSize: '11px'
+                          backgroundColor: '#0F1419',
+                          border: '2px solid #3ECF8E',
+                          borderRadius: '0.75rem',
+                          fontSize: '11px',
+                          color: '#E5E7EB'
                         }}
                       />
                       <Line
                         type="monotone"
                         dataKey="count"
                         stroke="#3ECF8E"
-                        strokeWidth={1.5}
-                        strokeOpacity={0.6}
+                        strokeWidth={2}
                         dot={false}
-                        activeDot={{ r: 3, strokeWidth: 0 }}
+                        activeDot={{ r: 4, strokeWidth: 0 }}
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -153,24 +151,33 @@ export default function DashboardOverview() {
         {/* Quick Actions */}
         <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-primary/20 hover:border-primary/30">
           <div className="card-body p-6">
-            <h2 className="card-title text-2xl font-bold mb-6">Quick Actions</h2>
+            <h2 className="card-title text-2xl font-bold mb-4">Quick Actions</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Link
                 href="/shorten"
-                className="btn btn-lg btn-outline rounded-xl hover:scale-105 transition-transform border-2"
+                className="btn btn-lg btn-outline btn-primary rounded-xl hover:scale-105 transition-transform"
               >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                </svg>
                 Create Short URL
               </Link>
               <Link
                 href="/qr-generator"
-                className="btn btn-lg btn-outline rounded-xl hover:scale-105 transition-transform border-2"
+                className="btn btn-lg btn-outline btn-primary rounded-xl hover:scale-105 transition-transform"
               >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                </svg>
                 Generate QR Code
               </Link>
               <Link
                 href="/markdown"
-                className="btn btn-lg btn-outline rounded-xl hover:scale-105 transition-transform border-2"
+                className="btn btn-lg btn-outline btn-primary rounded-xl hover:scale-105 transition-transform"
               >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
                 Convert Markdown
               </Link>
             </div>
