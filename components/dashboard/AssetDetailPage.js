@@ -36,59 +36,23 @@ export default function AssetDetailPage({ assetId, assetType }) {
 
       setAsset(assetData);
 
-      // For now, generate mock analytics data
-      // In a real app, you'd query the asset_analytics table
-      const mockAnalytics = {
-        totalScans: assetData?.click_count || assetData?.scan_count || assetData?.download_count || 0,
-        uniqueVisitors: Math.floor((assetData?.click_count || 0) * 0.7), // Mock calculation
-        firstScan: assetData?.created_at,
-        lastScan: assetData?.last_clicked_at || assetData?.last_scanned_at || assetData?.last_downloaded_at,
-        dailyScans: generateMockDailyScans(30),
-        topReferrers: [
-          { referrer: "Direct", count: 45 },
-          { referrer: "google.com", count: 28 },
-          { referrer: "twitter.com", count: 15 },
-          { referrer: "facebook.com", count: 12 },
-        ],
-        recentActivity: generateMockRecentActivity(10),
-      };
+      // Fetch real analytics data from API
+      const response = await fetch(
+        `/api/analytics/asset?assetId=${assetId}&assetType=${assetType}`
+      );
 
-      setAnalytics(mockAnalytics);
+      if (response.ok) {
+        const analyticsData = await response.json();
+        setAnalytics(analyticsData);
+      } else {
+        throw new Error("Failed to fetch analytics");
+      }
     } catch (error) {
       console.error("Error fetching asset details:", error);
       toast.error("Failed to load asset details");
     } finally {
       setLoading(false);
     }
-  };
-
-  const generateMockDailyScans = (days) => {
-    const data = [];
-    for (let i = days - 1; i >= 0; i--) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-      data.push({
-        date: date.toISOString().split("T")[0],
-        scans: Math.floor(Math.random() * 20),
-      });
-    }
-    return data;
-  };
-
-  const generateMockRecentActivity = (count) => {
-    const activity = [];
-    const referrers = ["Direct", "google.com", "twitter.com", "facebook.com", "linkedin.com"];
-
-    for (let i = 0; i < count; i++) {
-      const date = new Date();
-      date.setHours(date.getHours() - i * 3);
-      activity.push({
-        timestamp: date.toISOString(),
-        referrer: referrers[Math.floor(Math.random() * referrers.length)],
-        country: "US",
-      });
-    }
-    return activity;
   };
 
   const copyToClipboard = (text) => {

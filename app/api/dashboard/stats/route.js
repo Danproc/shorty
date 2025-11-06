@@ -62,20 +62,41 @@ export async function GET() {
       (recentMarkdown?.reduce((sum, md) => sum + (md.download_count || 0), 0) || 0);
 
     // Get daily activity for sparkline (last 7 days)
+    // Query asset_analytics table for real data
+    const { data: analyticsData } = await supabase
+      .from("asset_analytics")
+      .select("created_at")
+      .gte("created_at", sevenDaysAgo.toISOString())
+      .order("created_at", { ascending: true });
+
+    // Group analytics by day
     const dailyActivity = [];
+    const dailyCounts = {};
+
+    // Initialize all 7 days with 0
     for (let i = 6; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
-      date.setHours(0, 0, 0, 0);
+      const dateStr = date.toISOString().split('T')[0];
+      dailyCounts[dateStr] = 0;
+    }
 
-      const nextDate = new Date(date);
-      nextDate.setDate(nextDate.getDate() + 1);
+    // Count events per day
+    analyticsData?.forEach((event) => {
+      const dateStr = new Date(event.created_at).toISOString().split('T')[0];
+      if (dailyCounts[dateStr] !== undefined) {
+        dailyCounts[dateStr]++;
+      }
+    });
 
-      // For now, we'll use simple click counts
-      // In a real implementation, you'd query asset_analytics table
+    // Convert to array format for chart
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
       dailyActivity.push({
-        date: date.toISOString().split('T')[0],
-        value: Math.floor(Math.random() * 50), // Placeholder
+        date: dateStr,
+        value: dailyCounts[dateStr],
       });
     }
 
