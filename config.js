@@ -22,42 +22,22 @@ const config = {
             ? "price_1Niyy5AxyNprDp7iZIqEyD2h"
             : "price_456",
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Pro",
+        name: "Premium Dashboard",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for individuals and small teams",
+        description: "Unlock your personal dashboard with full access to analytics and asset management",
         // The price you want to display, the one user will be charged on Stripe.
-        price: 9,
+        price: 7,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
-        priceAnchor: 15,
+        priceAnchor: null,
         features: [
           {
-            name: "Unlimited storage",
+            name: "Personal Dashboard Access",
           },
-          { name: "Advanced analytics" },
-          { name: "Custom QR code branding" },
-          { name: "Priority support" },
-        ],
-      },
-      {
-        // This plan will look different on the pricing page, it will be highlighted. You can only have one plan with isFeatured: true
-        isFeatured: true,
-        priceId:
-          process.env.NODE_ENV === "development"
-            ? "price_1O5KtcAxyNprDp7iftKnrrpw"
-            : "price_456",
-        name: "Business",
-        description: "For growing businesses and teams",
-        price: 19,
-        priceAnchor: 29,
-        features: [
-          {
-            name: "Everything in Pro",
-          },
-          { name: "Team collaboration" },
-          { name: "API access" },
-          { name: "Custom domains" },
-          { name: "White-label options" },
-          { name: "24/7 priority support" },
+          { name: "View & manage all QR codes" },
+          { name: "Track all shortened URLs" },
+          { name: "Access all markdown files" },
+          { name: "Detailed analytics & click tracking" },
+          { name: "Unlimited asset management" },
         ],
       },
     ],

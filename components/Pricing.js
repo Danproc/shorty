@@ -62,7 +62,7 @@ const Pricing = () => {
                   </p>
                   <div className="flex flex-col justify-end mb-[4px]">
                     <p className="text-xs text-base-content/60 uppercase font-semibold">
-                      USD
+                      USD / month
                     </p>
                   </div>
                 </div>
@@ -92,7 +92,7 @@ const Pricing = () => {
                   <ButtonCheckout priceId={plan.priceId} />
 
                   <p className="flex items-center justify-center gap-2 text-sm text-center text-base-content/80 font-medium relative">
-                    Pay once. Access forever.
+                    £5 / $7 per month. Cancel anytime.
                   </p>
                 </div>
               </div>
