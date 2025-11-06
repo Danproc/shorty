@@ -104,46 +104,42 @@ export default function QRsPage() {
                 <p className="text-base-content/60">No QR codes yet. Create your first one!</p>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Target URL</th>
-                      <th>QR Code</th>
-                      <th>Scans</th>
-                      <th>Created</th>
-                      <th>Actions</th>
+              <div className="overflow-x-auto rounded-lg border border-base-300">
+                <table className="table w-full">
+                  <thead className="bg-base-200">
+                    <tr className="border-b border-base-300">
+                      <th className="font-semibold text-sm uppercase tracking-wide">Title</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Target URL</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">QR Code</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Scans</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Created</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {qrCodes.map((qr) => (
-                      <tr key={qr.id}>
+                      <tr key={qr.id} className="border-b border-base-200 hover:bg-base-100 transition-colors">
+                        <td className="font-medium">
+                          {qr.title || 'Untitled'}
+                        </td>
                         <td>
-                          <div className="font-medium">
-                            {qr.title || 'Untitled'}
-                          </div>
+                          <a
+                            href={qr.target_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link link-primary truncate max-w-xs inline-block hover:underline"
+                          >
+                            {qr.target_url}
+                          </a>
                         </td>
                         <td>
                           <div className="flex items-center gap-2">
-                            <a
-                              href={qr.target_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="link link-primary truncate max-w-xs"
-                            >
-                              {qr.target_url}
-                            </a>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="flex items-center gap-2">
-                            <code className="bg-base-200 px-2 py-1 rounded">
+                            <code className="bg-base-200 px-3 py-1.5 rounded-lg text-sm font-mono border border-base-300">
                               {window.location.origin}/q/{qr.qr_code}
                             </code>
                             <button
                               onClick={() => copyToClipboard(`${window.location.origin}/q/${qr.qr_code}`)}
-                              className="btn btn-ghost btn-xs"
+                              className="btn btn-ghost btn-sm rounded-lg hover:bg-base-200"
                               title="Copy to clipboard"
                             >
                               <svg
@@ -164,23 +160,23 @@ export default function QRsPage() {
                           </div>
                         </td>
                         <td>
-                          <div className="badge badge-ghost">
-                            {qr.scan_count || 0} scans
+                          <div className="badge badge-ghost badge-lg rounded-lg">
+                            {qr.scan_count || 0}
                           </div>
                         </td>
-                        <td>{formatDate(qr.created_at)}</td>
+                        <td className="text-sm text-base-content/70">{formatDate(qr.created_at)}</td>
                         <td>
                           <div className="flex gap-2">
                             <Link
                               href={`/qr-generator?url=${encodeURIComponent(qr.target_url)}&title=${encodeURIComponent(qr.title || '')}`}
-                              className="btn btn-ghost btn-xs"
+                              className="btn btn-sm btn-ghost rounded-lg hover:bg-base-200"
                               title="View QR code"
                             >
                               View
                             </Link>
                             <button
                               onClick={() => downloadQRCode(qr.qr_code, qr.target_url)}
-                              className="btn btn-ghost btn-xs"
+                              className="btn btn-sm btn-ghost rounded-lg hover:bg-base-200"
                               title="Download QR code"
                             >
                               <svg
