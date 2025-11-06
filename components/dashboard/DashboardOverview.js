@@ -28,7 +28,7 @@ export default function DashboardOverview() {
   };
 
   return (
-    <main className="min-h-screen p-4 md:p-8 pb-24 bg-base-200">
+    <main className="p-4 md:p-8 pb-24 bg-base-200">
       <section className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div>

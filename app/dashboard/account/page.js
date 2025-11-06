@@ -18,7 +18,7 @@ export default function AccountPage() {
   }, [supabase]);
 
   return (
-    <main className="min-h-screen p-4 md:p-8 pb-24 bg-base-200">
+    <main className="p-4 md:p-8 pb-24 bg-base-200">
       <section className="max-w-7xl mx-auto space-y-6">
         <div>
           <h1 className="text-3xl md:text-4xl font-extrabold">Account Settings</h1>
