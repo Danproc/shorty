@@ -22,20 +22,20 @@ const config = {
             ? "price_1Niyy5AxyNprDp7iZIqEyD2h"
             : "price_456",
         //  REQUIRED - Name of the plan, displayed on the pricing page
-        name: "Starter",
+        name: "Pro",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for small projects",
+        description: "Perfect for individuals and small teams",
         // The price you want to display, the one user will be charged on Stripe.
-        price: 79,
+        price: 9,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
-        priceAnchor: 99,
+        priceAnchor: 15,
         features: [
           {
-            name: "NextJS boilerplate",
+            name: "Unlimited storage",
           },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
+          { name: "Advanced analytics" },
+          { name: "Custom QR code branding" },
+          { name: "Priority support" },
         ],
       },
       {
@@ -45,19 +45,19 @@ const config = {
           process.env.NODE_ENV === "development"
             ? "price_1O5KtcAxyNprDp7iftKnrrpw"
             : "price_456",
-        name: "Advanced",
-        description: "You need more power",
-        price: 99,
-        priceAnchor: 149,
+        name: "Business",
+        description: "For growing businesses and teams",
+        price: 19,
+        priceAnchor: 29,
         features: [
           {
-            name: "NextJS boilerplate",
+            name: "Everything in Pro",
           },
-          { name: "User oauth" },
-          { name: "Database" },
-          { name: "Emails" },
-          { name: "1 year of updates" },
-          { name: "24/7 support" },
+          { name: "Team collaboration" },
+          { name: "API access" },
+          { name: "Custom domains" },
+          { name: "White-label options" },
+          { name: "24/7 priority support" },
         ],
       },
     ],
