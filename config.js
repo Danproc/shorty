@@ -5,7 +5,7 @@ const config = {
   appDescription:
     "Free URL shortener and QR code generator. Create short links and beautiful QR codes instantly.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: "shorty.app",
+  domainName: "cuer.io",
   crisp: {
     // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (resend.supportEmail) otherwise customer support won't work.
     id: "",
@@ -70,9 +70,9 @@ const config = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `Cuer.io <noreply@resend.shipfa.st>`,
+    fromNoReply: `Cuer.io <noreply@cuer.io>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Cuer.io <marc@resend.shipfa.st>`,
+    fromAdmin: `Cuer.io <admin@cuer.io>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
     supportEmail: "marc.louvion@gmail.com",
   },
