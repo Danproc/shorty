@@ -61,37 +61,49 @@ export async function GET(request) {
       .eq("asset_id", assetId)
       .single();
 
-    // Get daily scans for last 30 days
+    // Get daily scans for last 30 days (with event type breakdown)
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     const { data: dailyData } = await supabase
       .from("asset_analytics")
-      .select("created_at")
+      .select("created_at, event_type")
       .eq("asset_type", dbAssetType)
       .eq("asset_id", assetId)
       .gte("created_at", thirtyDaysAgo.toISOString())
       .order("created_at", { ascending: true });
 
-    // Group by day
+    // Group by day and event type
     const dailyScans = {};
     for (let i = 29; i >= 0; i--) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dateStr = date.toISOString().split("T")[0];
-      dailyScans[dateStr] = 0;
+      dailyScans[dateStr] = { visits: 0, scans: 0, total: 0 };
     }
 
     dailyData?.forEach((event) => {
       const dateStr = new Date(event.created_at).toISOString().split("T")[0];
       if (dailyScans[dateStr] !== undefined) {
-        dailyScans[dateStr]++;
+        dailyScans[dateStr].total++;
+
+        // Categorize by event type
+        if (event.event_type === 'visit') {
+          dailyScans[dateStr].visits++;
+        } else if (event.event_type === 'scan') {
+          dailyScans[dateStr].scans++;
+        } else {
+          // For backwards compatibility, count other event types as visits
+          dailyScans[dateStr].visits++;
+        }
       }
     });
 
-    const dailyScansArray = Object.entries(dailyScans).map(([date, scans]) => ({
+    const dailyScansArray = Object.entries(dailyScans).map(([date, counts]) => ({
       date,
-      scans,
+      scans: counts.total, // Keep for backwards compatibility
+      visits: counts.visits,
+      qr_scans: counts.scans,
     }));
 
     // Get top referrers

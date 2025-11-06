@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { createClient } from "@/libs/supabase/client";
 import KPICard from "./KPICard";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
+import AnalyticsChart from "./AnalyticsChart";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import toast from "react-hot-toast";
 
 export default function AssetDetailPage({ assetId, assetType }) {
@@ -144,43 +145,35 @@ export default function AssetDetailPage({ assetId, assetType }) {
           />
         </div>
 
-        {/* Daily Scans Chart */}
-        <div className="card bg-base-100 shadow-xl">
-          <div className="card-body">
-            <h2 className="card-title mb-4">Daily Scans (Last 30 Days)</h2>
-            <div className="h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={analytics?.dailyScans || []}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="scans"
-                    stroke="#3ECF8E"
-                    strokeWidth={2}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
+        {/* Enhanced Analytics Chart with PostHog-style Visualization */}
+        <AnalyticsChart
+          assetId={assetId}
+          assetType={assetType}
+          analytics={analytics}
+          loading={loading}
+        />
 
         {/* Top Referrers and Recent Activity */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Top Referrers */}
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title mb-4">Top Referrers</h2>
+          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+            <div className="card-body p-6">
+              <h2 className="card-title text-2xl font-bold mb-6">Top Referrers</h2>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={analytics?.topReferrers || []}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="referrer" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="#3ECF8E" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                    <XAxis dataKey="referrer" stroke="#6b7280" />
+                    <YAxis stroke="#6b7280" />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: '#ffffff',
+                        border: '2px solid #3ECF8E',
+                        borderRadius: '0.75rem',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                      }}
+                    />
+                    <Bar dataKey="count" fill="#3ECF8E" radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -188,22 +181,22 @@ export default function AssetDetailPage({ assetId, assetType }) {
           </div>
 
           {/* Recent Activity */}
-          <div className="card bg-base-100 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title mb-4">Recent Activity</h2>
+          <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border-2 border-base-300">
+            <div className="card-body p-6">
+              <h2 className="card-title text-2xl font-bold mb-6">Recent Activity</h2>
               <div className="overflow-x-auto">
                 <table className="table table-sm">
                   <thead>
-                    <tr>
-                      <th>Time</th>
-                      <th>Referrer</th>
-                      <th>Country</th>
+                    <tr className="border-b-2 border-base-300">
+                      <th className="font-bold text-base-content">Time</th>
+                      <th className="font-bold text-base-content">Referrer</th>
+                      <th className="font-bold text-base-content">Country</th>
                     </tr>
                   </thead>
                   <tbody>
                     {analytics?.recentActivity?.map((activity, index) => (
-                      <tr key={index}>
-                        <td className="text-xs">
+                      <tr key={index} className="hover:bg-base-200 transition-colors">
+                        <td className="text-xs font-medium">
                           {new Date(activity.timestamp).toLocaleString()}
                         </td>
                         <td className="text-xs">{activity.referrer}</td>
