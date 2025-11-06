@@ -1,11 +1,13 @@
 import { Suspense } from 'react'
 import Link from 'next/link'
+import Script from 'next/script'
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MarkdownConverter from '@/components/MarkdownConverter';
 import { getSEOTags } from "@/libs/seo";
 import { createClient } from "@/libs/supabase/server";
 import { checkSubscription } from "@/libs/subscription";
+import './markdown-themes.css';
 
 export const metadata = getSEOTags({
   title: 'Free Markdown to HTML Converter - Online MD Editor | Cuer.io',
@@ -36,8 +38,57 @@ export default async function MarkdownPage() {
       <Suspense>
         <Header />
       </Suspense>
+
+      {/* Prism CSS for code highlighting */}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
+
+      {/* Prism JS for code highlighting - load before converter mounts */}
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-tsx.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"
+        strategy="beforeInteractive"
+      />
+      <Script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"
+        strategy="beforeInteractive"
+      />
+
       <main className="flex-1 bg-base-200 py-8 px-4">
-        <MarkdownConverter />
+        <MarkdownConverter
+          isAuthenticated={!!user}
+          userId={user?.id}
+        />
 
         {/* Membership CTA - Only show if user doesn't have paid subscription */}
         {!hasAccess && (
