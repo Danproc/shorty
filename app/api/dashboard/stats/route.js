@@ -96,7 +96,7 @@ export async function GET() {
       const dateStr = date.toISOString().split('T')[0];
       dailyActivity.push({
         date: dateStr,
-        value: dailyCounts[dateStr],
+        count: dailyCounts[dateStr],
       });
     }
 
