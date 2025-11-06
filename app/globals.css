@@ -67,6 +67,19 @@
 html,
 body {
   scroll-behavior: smooth !important;
+  height: 100%;
+}
+
+/* Ensure body fills the viewport for sticky footer */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#__next {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 progress::-webkit-progress-value {

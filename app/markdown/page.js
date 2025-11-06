@@ -32,11 +32,11 @@ export default async function MarkdownPage() {
     hasAccess = userHasAccess;
   }
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Suspense>
         <Header />
       </Suspense>
-      <main className="bg-base-200 py-8 px-4">
+      <main className="flex-1 bg-base-200 py-8 px-4">
         <MarkdownConverter />
 
         {/* Membership CTA - Only show if user doesn't have paid subscription */}
@@ -100,6 +100,6 @@ export default async function MarkdownPage() {
         )}
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
