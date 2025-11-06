@@ -14,17 +14,17 @@ const Hero = ({ hasAccess = false }) => {
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <header className="text-center mb-16">
           <h1 className="font-bold text-6xl lg:text-8xl tracking-tight mb-6 bg-gradient-to-br from-base-content to-base-content/60 bg-clip-text text-transparent">
-            Cuer.io
+            Free QR Code Generator & URL Shortener
           </h1>
           <p className="text-2xl lg:text-3xl text-primary font-semibold mb-4">
-            Simple tools for the modern web
+            Create QR Codes and Shorten Links Instantly - 100% Free
           </p>
           <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
-            Shorten URLs, generate QR codes, and convert Markdown to HTML. Fast, free, and beautifully minimal.
+            Professional free tools to generate QR codes, shorten URLs, and convert Markdown to HTML. No signup required. Fast, secure, and completely free forever.
           </p>
-        </div>
+        </header>
 
         {/* Tools Cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -39,10 +39,10 @@ const Hero = ({ hasAccess = false }) => {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
                     </svg>
                   </div>
-                  <h2 className="card-title text-2xl">URL Shortener</h2>
+                  <h2 className="card-title text-2xl">FREE URL Shortener</h2>
                 </div>
                 <p className="text-base-content/60 mb-4">
-                  Transform long URLs into short, memorable links with click tracking.
+                  Our free URL shortener transforms long URLs into short, memorable links instantly. Track clicks and share your shortened links anywhere. No account required.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-primary group-hover:gap-3 transition-all duration-300">
                   <span>Try it now</span>
@@ -66,10 +66,10 @@ const Hero = ({ hasAccess = false }) => {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75zM6.75 16.5h.75v.75h-.75v-.75zM16.5 6.75h.75v.75h-.75v-.75zM13.5 13.5h.75v.75h-.75v-.75zM13.5 19.5h.75v.75h-.75v-.75zM19.5 13.5h.75v.75h-.75v-.75zM19.5 19.5h.75v.75h-.75v-.75zM16.5 16.5h.75v.75h-.75v-.75z" />
                     </svg>
                   </div>
-                  <h2 className="card-title text-2xl">QR Generator</h2>
+                  <h2 className="card-title text-2xl">Free QR Code Generator</h2>
                 </div>
                 <p className="text-base-content/60 mb-4">
-                  Create high-quality QR codes for any URL. Download as PNG or SVG.
+                  Generate free QR codes instantly for URLs, text, emails, and more. Download high-quality QR codes as PNG or SVG. Perfect for marketing, business cards, and menus.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-primary group-hover:gap-3 transition-all duration-300">
                   <span>Try it now</span>
