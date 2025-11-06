@@ -117,7 +117,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="Copy short URL"
               >
-                📋
+                Copy
               </button>
               <Link
                 href={`/dashboard/assets/${asset.id}?type=url`}
@@ -125,7 +125,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="View analytics"
               >
-                📊
+                Analytics
               </Link>
               <button
                 onClick={() => handleDelete(asset.id)}
@@ -133,7 +133,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="Delete"
               >
-                🗑️
+                Delete
               </button>
             </div>
           </td>
@@ -171,7 +171,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="Copy QR URL"
               >
-                📋
+                Copy
               </button>
               <Link
                 href={`/dashboard/assets/${asset.id}?type=qr`}
@@ -179,7 +179,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="View analytics"
               >
-                📊
+                Analytics
               </Link>
               <button
                 onClick={() => handleDelete(asset.id)}
@@ -187,7 +187,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="Delete"
               >
-                🗑️
+                Delete
               </button>
             </div>
           </td>
@@ -218,7 +218,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="View details"
               >
-                📊
+                Details
               </Link>
               <button
                 onClick={() => handleDelete(asset.id)}
@@ -226,7 +226,7 @@ export default function AssetsPage() {
                 data-tooltip-id="tooltip"
                 data-tooltip-content="Delete"
               >
-                🗑️
+                Delete
               </button>
             </div>
           </td>
@@ -260,21 +260,21 @@ export default function AssetsPage() {
                 className={`tab ${activeTab === "urls" ? "tab-active" : ""}`}
                 onClick={() => setActiveTab("urls")}
               >
-                🔗 Short URLs
+                Short URLs
               </a>
               <a
                 role="tab"
                 className={`tab ${activeTab === "qr" ? "tab-active" : ""}`}
                 onClick={() => setActiveTab("qr")}
               >
-                📱 QR Codes
+                QR Codes
               </a>
               <a
                 role="tab"
                 className={`tab ${activeTab === "markdown" ? "tab-active" : ""}`}
                 onClick={() => setActiveTab("markdown")}
               >
-                📝 Markdown Files
+                Markdown Files
               </a>
             </div>
 

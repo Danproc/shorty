@@ -5,10 +5,12 @@ import Link from "next/link";
 import ButtonAccount from "@/components/ButtonAccount";
 import KPICard from "./KPICard";
 import MiniChart from "./MiniChart";
+import { createClient } from "@/libs/supabase/client";
 
 export default function DashboardOverview() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetchStats();
@@ -47,13 +49,11 @@ export default function DashboardOverview() {
           <KPICard
             title="Total Assets"
             value={loading ? "..." : stats?.totalAssets || 0}
-            icon="📦"
             loading={loading}
           />
           <KPICard
             title="Total Scans (7 days)"
             value={loading ? "..." : stats?.totalScans7Days || 0}
-            icon="📊"
             loading={loading}
           />
           <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow">
@@ -82,7 +82,6 @@ export default function DashboardOverview() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="stat bg-base-200 rounded-lg">
-                <div className="stat-figure text-2xl">🔗</div>
                 <div className="stat-title">Short URLs</div>
                 <div className="stat-value text-2xl">
                   {loading ? "..." : stats?.urlsCount || 0}
@@ -95,7 +94,6 @@ export default function DashboardOverview() {
               </div>
 
               <div className="stat bg-base-200 rounded-lg">
-                <div className="stat-figure text-2xl">📱</div>
                 <div className="stat-title">QR Codes</div>
                 <div className="stat-value text-2xl">
                   {loading ? "..." : stats?.qrCount || 0}
@@ -108,7 +106,6 @@ export default function DashboardOverview() {
               </div>
 
               <div className="stat bg-base-200 rounded-lg">
-                <div className="stat-figure text-2xl">📝</div>
                 <div className="stat-title">MD Files</div>
                 <div className="stat-value text-2xl">
                   {loading ? "..." : stats?.markdownCount || 0}
@@ -130,24 +127,21 @@ export default function DashboardOverview() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Link
                 href="/shorten"
-                className="btn btn-lg btn-outline justify-start gap-3"
+                className="btn btn-lg btn-outline"
               >
-                <span className="text-2xl">🔗</span>
-                <span>Create Short URL</span>
+                Create Short URL
               </Link>
               <Link
                 href="/qr-generator"
-                className="btn btn-lg btn-outline justify-start gap-3"
+                className="btn btn-lg btn-outline"
               >
-                <span className="text-2xl">📱</span>
-                <span>Generate QR Code</span>
+                Generate QR Code
               </Link>
               <Link
                 href="/markdown"
-                className="btn btn-lg btn-outline justify-start gap-3"
+                className="btn btn-lg btn-outline"
               >
-                <span className="text-2xl">📝</span>
-                <span>Convert Markdown</span>
+                Convert Markdown
               </Link>
             </div>
           </div>
