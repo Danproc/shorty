@@ -36,7 +36,7 @@ export default async function MarkdownPage() {
       <Suspense>
         <Header />
       </Suspense>
-      <main className="min-h-screen bg-base-200 py-8 px-4">
+      <main className="bg-base-200 py-8 px-4">
         <MarkdownConverter />
 
         {/* Membership CTA - Only show if user doesn't have paid subscription */}
