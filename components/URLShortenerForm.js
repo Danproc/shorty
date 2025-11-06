@@ -4,6 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import QRCodeDisplay from './QRCodeDisplay';
+import { trackEvent } from '@/libs/posthog/client';
 
 export default function URLShortenerForm({ showCustomSlug = false }) {
   const [url, setUrl] = useState('');
@@ -34,6 +35,13 @@ export default function URLShortenerForm({ showCustomSlug = false }) {
         setResult(response.data.data);
         toast.success('Short URL created successfully!');
 
+        // Track event in PostHog
+        trackEvent('Asset Created', {
+          kind: 'short_url',
+          has_custom_slug: !!customSlug,
+          has_title: !!title,
+        });
+
         // Reset form
         setUrl('');
         setCustomSlug('');
@@ -53,6 +61,11 @@ export default function URLShortenerForm({ showCustomSlug = false }) {
     try {
       await navigator.clipboard.writeText(text);
       toast.success('Copied to clipboard!');
+
+      // Track event in PostHog
+      trackEvent('Short Link Copied', {
+        short_code: result?.shortCode,
+      });
     } catch (error) {
       toast.error('Failed to copy');
     }

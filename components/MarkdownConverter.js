@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { trackEvent } from '@/libs/posthog/client';
 
 export default function MarkdownConverter() {
   const [markdown, setMarkdown] = useState('# Hello, Markdown!\n\nStart typing your **markdown** here...');
@@ -60,6 +61,12 @@ export default function MarkdownConverter() {
       if (response.data.success) {
         toast.success('Saved successfully!');
         setTitle('');
+
+        // Track event in PostHog
+        trackEvent('Asset Created', {
+          kind: 'markdown',
+          is_public: isPublic,
+        });
       }
     } catch (error) {
       const errorMessage = error.response?.data?.error || 'Failed to save conversion';
@@ -74,6 +81,11 @@ export default function MarkdownConverter() {
     try {
       await navigator.clipboard.writeText(text);
       toast.success(`${type} copied to clipboard!`);
+
+      // Track event in PostHog
+      trackEvent('MD Converted', {
+        output_type: type.toLowerCase(),
+      });
     } catch (error) {
       toast.error('Failed to copy');
     }
