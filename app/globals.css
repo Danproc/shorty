@@ -107,6 +107,59 @@ progress::-webkit-progress-value {
 
 .btn {
   text-transform: capitalize !important;
+  border-radius: 0.75rem !important;
+}
+
+/* Global rounded borders for all card/box elements */
+.card,
+.card-body,
+[class*="card"],
+.modal-box,
+.drawer-side,
+.menu,
+.dropdown-content,
+input,
+textarea,
+select,
+.input,
+.select,
+.textarea,
+.join,
+.join > *,
+.alert,
+.badge,
+.progress,
+.radial-progress,
+.stats,
+.stat,
+.steps,
+.step,
+.kbd,
+.artboard,
+.phone,
+.browser,
+.mockup-code,
+.mockup-window,
+.indicator,
+.avatar,
+.divider,
+.tooltip,
+.collapse,
+.navbar,
+.footer,
+.hero,
+.tabs,
+.tab,
+.breadcrumbs,
+.link,
+.menu li,
+.form-control,
+.label,
+.chat,
+.timeline,
+.carousel,
+.skeleton {
+  border-radius: 0.75rem !important;
 }
 
 /* Fix text wrapping in labels */
