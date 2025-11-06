@@ -20,7 +20,7 @@ const config = {
         priceId:
           process.env.NODE_ENV === "development"
             ? "price_1Niyy5AxyNprDp7iZIqEyD2h"
-            : "price_456",
+            : process.env.NEXT_PUBLIC_STRIPE_PRICE_ID || "price_456",
         //  REQUIRED - Name of the plan, displayed on the pricing page
         name: "Premium Dashboard",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
