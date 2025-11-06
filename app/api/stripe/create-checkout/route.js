@@ -6,6 +6,15 @@ import { NextResponse } from "next/server";
 // It's called by the <ButtonCheckout /> component
 // Users must be authenticated. It will prefill the Checkout data with their email and/or credit card (if any)
 export async function POST(req) {
+  // Check for required environment variables first
+  if (!process.env.STRIPE_SECRET_KEY) {
+    console.error("STRIPE_SECRET_KEY environment variable is not set");
+    return NextResponse.json(
+      { error: "Stripe is not configured. Please contact support." },
+      { status: 500 }
+    );
+  }
+
   const body = await req.json();
 
   if (!body.priceId) {
@@ -61,7 +70,10 @@ export async function POST(req) {
 
     return NextResponse.json({ url: stripeSessionURL });
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: e?.message }, { status: 500 });
+    console.error("Error creating checkout session:", e);
+    return NextResponse.json(
+      { error: e?.message || "Failed to create checkout session" },
+      { status: 500 }
+    );
   }
 }
