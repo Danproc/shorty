@@ -4,6 +4,10 @@ import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
+import { sendEmail } from "@/libs/resend";
+import { WelcomeEmail } from "@/emails/WelcomeEmail";
+import { SubscriptionRenewalEmail } from "@/emails/SubscriptionRenewalEmail";
+import { SubscriptionCancelledEmail } from "@/emails/SubscriptionCancelledEmail";
 
 // This is where we receive Stripe webhook events
 // It used to update the user data, send emails, etc...
@@ -171,12 +175,24 @@ export async function POST(req) {
         console.log("🎉 SUCCESS! Profile updated with subscription access for user:", user.id);
         console.log("✅ User should now have access to dashboard");
 
-        // Extra: send email with user link, product page, etc...
-        // try {
-        //   await sendEmail(...);
-        // } catch (e) {
-        //   console.error("Email issue:" + e?.message);
-        // }
+        // Send welcome email
+        try {
+          const emailContent = WelcomeEmail({
+            userName: customer.name || customer.email.split('@')[0],
+            email: customer.email,
+          });
+
+          await sendEmail({
+            to: customer.email,
+            subject: emailContent.subject,
+            html: emailContent.html,
+            text: emailContent.text,
+          });
+
+          console.log("📧 Welcome email sent successfully to:", customer.email);
+        } catch (e) {
+          console.error("📧 Email issue:", e?.message);
+        }
 
         break;
       }
@@ -214,6 +230,37 @@ export async function POST(req) {
         } else {
           console.log("✅ Access revoked successfully");
         }
+
+        // Send cancellation email
+        try {
+          const customer = await stripe.customers.retrieve(subscription.customer);
+
+          // Get the end date of the subscription
+          const endDate = new Date(subscription.current_period_end * 1000);
+          const formattedEndDate = endDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          const emailContent = SubscriptionCancelledEmail({
+            userName: customer.name || customer.email.split('@')[0],
+            email: customer.email,
+            endDate: formattedEndDate,
+          });
+
+          await sendEmail({
+            to: customer.email,
+            subject: emailContent.subject,
+            html: emailContent.html,
+            text: emailContent.text,
+          });
+
+          console.log("📧 Cancellation email sent successfully to:", customer.email);
+        } catch (e) {
+          console.error("📧 Email issue:", e?.message);
+        }
+
         break;
       }
 
@@ -263,6 +310,39 @@ export async function POST(req) {
           console.error("❌ Failed to grant access:", error);
         } else {
           console.log("✅ Access granted successfully for recurring payment");
+        }
+
+        // Send renewal email
+        try {
+          const customer = await stripe.customers.retrieve(customerId);
+          const amountPaid = (stripeObject.amount_paid / 100).toFixed(2);
+
+          // Calculate next billing date (approximately 1 month from now)
+          const nextBillingDate = new Date();
+          nextBillingDate.setMonth(nextBillingDate.getMonth() + 1);
+          const formattedDate = nextBillingDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          const emailContent = SubscriptionRenewalEmail({
+            userName: customer.name || customer.email.split('@')[0],
+            email: customer.email,
+            amount: amountPaid,
+            nextBillingDate: formattedDate,
+          });
+
+          await sendEmail({
+            to: customer.email,
+            subject: emailContent.subject,
+            html: emailContent.html,
+            text: emailContent.text,
+          });
+
+          console.log("📧 Renewal email sent successfully to:", customer.email);
+        } catch (e) {
+          console.error("📧 Email issue:", e?.message);
         }
 
         break;
