@@ -46,7 +46,6 @@ export const WelcomeEmail = ({ userName, email }) => {
                   <li>Access your personal dashboard</li>
                   <li>Create and track unlimited short URLs</li>
                   <li>Generate custom QR codes</li>
-                  <li>Convert markdown to HTML</li>
                   <li>View detailed analytics</li>
                 </ul>
               </div>
@@ -93,7 +92,6 @@ What you can do now:
 - Access your personal dashboard
 - Create and track unlimited short URLs
 - Generate custom QR codes
-- Convert markdown to HTML
 - View detailed analytics
 
 Go to your dashboard: ${baseUrl}/dashboard

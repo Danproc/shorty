@@ -62,6 +62,19 @@ const Footer = () => {
             </div>
           </div>
         </div>
+
+        {/* Website Credit */}
+        <div className="flex justify-center mt-8 pb-4">
+          <a
+            href="https://thenorthern-web.co.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-300/50 hover:bg-base-300 transition-colors border border-base-content/10"
+          >
+            <span className="text-xs text-base-content/60">Website by</span>
+            <span className="text-xs font-semibold text-base-content/80">The Northern Web</span>
+          </a>
+        </div>
       </div>
     </footer>
   );

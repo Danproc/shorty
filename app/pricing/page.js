@@ -10,12 +10,12 @@ import { getSEOTags } from "@/libs/seo";
 
 export const metadata = getSEOTags({
   title: `Pricing Plans - Dashboard Access & Analytics | ${config.appName}`,
-  description: "Free tools for everyone. Subscribe to unlock your personal dashboard with advanced analytics, asset management, and click tracking. Manage all your QR codes, URLs, and markdown files in one place.",
+  description: "Free tools for everyone. Subscribe to unlock your personal dashboard with advanced analytics, asset management, and click tracking. Manage all your QR codes and URLs in one place.",
   keywords: ["pricing", "subscription plans", "dashboard access", "qr code analytics", "url analytics", "link tracking", "premium features"],
   canonicalUrlRelative: "/pricing",
   openGraph: {
     title: `Pricing Plans | ${config.appName}`,
-    description: "Subscribe to access your dashboard, analytics, and manage all your QR codes, URLs, and files in one place.",
+    description: "Subscribe to access your dashboard, analytics, and manage all your QR codes and URLs in one place.",
     url: "https://cuer.io/pricing",
   },
 });
@@ -108,12 +108,6 @@ export default async function PricingPage() {
                     <svg className="w-5 h-5 text-success mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                     </svg>
-                    <span>Unlimited markdown file conversion</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <svg className="w-5 h-5 text-success mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
                     <span>All QR codes and URLs work forever</span>
                   </li>
                 </ul>
@@ -123,9 +117,6 @@ export default async function PricingPage() {
                   </Link>
                   <Link href="/shorten" className="btn btn-outline flex-1">
                     URL Shortener
-                  </Link>
-                  <Link href="/markdown" className="btn btn-outline flex-1">
-                    Markdown Converter
                   </Link>
                 </div>
               </div>
@@ -196,12 +187,6 @@ export default async function PricingPage() {
                         <svg className="w-5 h-5 text-primary mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <span>Access all your markdown files</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-primary mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
                         <span>Analytics for all assets</span>
                       </li>
                       <li className="flex items-start gap-2">
@@ -256,7 +241,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="collapse-content">
                   <p>
-                    Absolutely! You can generate QR codes, shorten URLs, and convert markdown files completely free without any subscription. All your generated assets will work forever.
+                    Absolutely! You can generate QR codes and shorten URLs completely free without any subscription. All your generated assets will work forever.
                   </p>
                 </div>
               </div>
@@ -268,7 +253,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="collapse-content">
                   <p>
-                    A subscription unlocks your personal dashboard where you can view, manage, and analyze all your QR codes, shortened URLs, and markdown files in one place. You&apos;ll get detailed analytics, click tracking, and easy asset management.
+                    A subscription unlocks your personal dashboard where you can view, manage, and analyze all your QR codes and shortened URLs in one place. You&apos;ll get detailed analytics, click tracking, and easy asset management.
                   </p>
                 </div>
               </div>
@@ -292,7 +277,7 @@ export default async function PricingPage() {
                 </div>
                 <div className="collapse-content">
                   <p>
-                    All your QR codes, shortened URLs, and markdown files will continue to work forever, even if you cancel your subscription. You&apos;ll just lose access to the dashboard and analytics features.
+                    All your QR codes and shortened URLs will continue to work forever, even if you cancel your subscription. You&apos;ll just lose access to the dashboard and analytics features.
                   </p>
                 </div>
               </div>
