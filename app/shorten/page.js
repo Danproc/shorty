@@ -255,7 +255,7 @@ export default async function ShortenPage() {
             <section className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg p-8 not-prose">
               <h2 className="text-2xl font-bold mb-4 text-center">The Best Free URL Shortener Tool</h2>
               <p className="text-base-content/80 mb-4">
-                Cuer.io offers a powerful free URL shortener that helps marketers, businesses, content creators, and individuals create clean, memorable short links. Whether you're sharing links on social media, running email campaigns, or promoting your business, our URL shortener makes your links more manageable and trackable.
+                Cuer.io offers a powerful free URL shortener that helps marketers, businesses, content creators, and individuals create clean, memorable short links. Whether you&apos;re sharing links on social media, running email campaigns, or promoting your business, our URL shortener makes your links more manageable and trackable.
               </p>
               <p className="text-base-content/80 mb-4">
                 Unlike other URL shorteners that require signup or charge fees, our service is completely free with no registration required. Simply paste your long URL, click shorten, and get your short link instantly. All shortened URLs are permanent and will never expire.

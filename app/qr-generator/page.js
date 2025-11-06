@@ -187,7 +187,7 @@ export default async function QRGeneratorPage() {
                     Safe & Secure
                   </h3>
                   <p className="text-base-content/70">
-                    Your data stays private. We don't store your QR code content or track what you generate. Create QR codes with confidence knowing your information is secure and private.
+                    Your data stays private. We don&apos;t store your QR code content or track what you generate. Create QR codes with confidence knowing your information is secure and private.
                   </p>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default async function QRGeneratorPage() {
                 <li className="text-lg"><strong>Download & use</strong> - Download your QR code in PNG or SVG format and use it anywhere you need</li>
               </ol>
               <p className="mt-6 text-center text-base-content/70">
-                It's that simple! No technical knowledge required. Start creating free QR codes now.
+                It&apos;s that simple! No technical knowledge required. Start creating free QR codes now.
               </p>
             </section>
 
