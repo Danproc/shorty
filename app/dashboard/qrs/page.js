@@ -54,9 +54,16 @@ export default function QRsPage() {
     navigator.clipboard.writeText(text);
   };
 
-  const downloadQRCode = (qrCode, targetUrl) => {
+  const getQRCodeUrl = (qr) => {
+    // If tracking is enabled, use redirect URL. Otherwise, use direct target URL.
+    return qr.tracking_enabled
+      ? `${window.location.origin}/qr/${qr.qr_code}`
+      : qr.target_url;
+  };
+
+  const downloadQRCode = (qr) => {
     try {
-      const canvas = document.getElementById(`qr-canvas-${qrCode}`);
+      const canvas = document.getElementById(`qr-canvas-${qr.qr_code}`);
       if (!canvas) {
         toast.error('Failed to download QR code');
         return;
@@ -65,7 +72,7 @@ export default function QRsPage() {
       const url = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = url;
-      link.download = `qr-code-${qrCode}.png`;
+      link.download = `qr-code-${qr.qr_code}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -111,6 +118,7 @@ export default function QRsPage() {
                       <th className="font-semibold text-sm uppercase tracking-wide">Title</th>
                       <th className="font-semibold text-sm uppercase tracking-wide">Target URL</th>
                       <th className="font-semibold text-sm uppercase tracking-wide">QR Code</th>
+                      <th className="font-semibold text-sm uppercase tracking-wide">Tracking</th>
                       <th className="font-semibold text-sm uppercase tracking-wide">Scans</th>
                       <th className="font-semibold text-sm uppercase tracking-wide">Created</th>
                       <th className="font-semibold text-sm uppercase tracking-wide">Actions</th>
@@ -134,11 +142,11 @@ export default function QRsPage() {
                         </td>
                         <td>
                           <div className="flex items-center gap-2">
-                            <code className="bg-base-200 px-3 py-1.5 rounded-lg text-sm font-mono border border-base-300">
-                              {window.location.origin}/q/{qr.qr_code}
+                            <code className="bg-base-200 px-3 py-1.5 rounded-lg text-sm font-mono border border-base-300 max-w-xs truncate">
+                              {qr.tracking_enabled ? `/qr/${qr.qr_code}` : qr.target_url}
                             </code>
                             <button
-                              onClick={() => copyToClipboard(`${window.location.origin}/q/${qr.qr_code}`)}
+                              onClick={() => copyToClipboard(getQRCodeUrl(qr))}
                               className="btn btn-ghost btn-sm rounded-lg hover:bg-base-200"
                               title="Copy to clipboard"
                             >
@@ -160,9 +168,30 @@ export default function QRsPage() {
                           </div>
                         </td>
                         <td>
-                          <div className="badge badge-ghost badge-lg rounded-lg">
-                            {qr.scan_count || 0}
-                          </div>
+                          {qr.tracking_enabled ? (
+                            <div className="badge badge-success badge-sm gap-1 rounded-lg">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              Enabled
+                            </div>
+                          ) : (
+                            <div className="badge badge-ghost badge-sm gap-1 rounded-lg">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                              </svg>
+                              Disabled
+                            </div>
+                          )}
+                        </td>
+                        <td>
+                          {qr.tracking_enabled ? (
+                            <div className="badge badge-ghost badge-lg rounded-lg">
+                              {qr.scan_count || 0}
+                            </div>
+                          ) : (
+                            <div className="text-sm text-base-content/50">—</div>
+                          )}
                         </td>
                         <td className="text-sm text-base-content/70">{formatDate(qr.created_at)}</td>
                         <td>
@@ -175,7 +204,7 @@ export default function QRsPage() {
                               View
                             </Link>
                             <button
-                              onClick={() => downloadQRCode(qr.qr_code, qr.target_url)}
+                              onClick={() => downloadQRCode(qr)}
                               className="btn btn-sm btn-ghost rounded-lg hover:bg-base-200"
                               title="Download QR code"
                             >
@@ -198,7 +227,7 @@ export default function QRsPage() {
                             <div style={{ display: 'none' }}>
                               <QRCodeCanvas
                                 id={`qr-canvas-${qr.qr_code}`}
-                                value={`${window.location.origin}/q/${qr.qr_code}`}
+                                value={getQRCodeUrl(qr)}
                                 size={512}
                                 level="M"
                                 includeMargin={true}

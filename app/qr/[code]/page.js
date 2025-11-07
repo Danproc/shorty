@@ -89,61 +89,64 @@ export default async function QRRedirectPage({ params }) {
     );
   }
 
-  // Increment scan count (fire and forget)
-  supabase.rpc('increment_qr_scan_count', {
-    qr_code_param: code
-  }).then(({ error }) => {
-    if (error) {
-      console.error('Error incrementing scan count:', error);
-    }
-  });
+  // Only track scans if tracking is enabled (premium feature)
+  if (qrCode.tracking_enabled) {
+    // Increment scan count (fire and forget)
+    supabase.rpc('increment_qr_scan_count', {
+      qr_code_param: code
+    }).then(({ error }) => {
+      if (error) {
+        console.error('Error incrementing scan count:', error);
+      }
+    });
 
-  // Track analytics event (fire and forget)
-  const trackAnalytics = async () => {
-    try {
-      const headersList = await headers();
-      const userAgent = headersList.get('user-agent') || '';
-      const referer = headersList.get('referer') || headersList.get('referrer') || null;
-      const countryCode = headersList.get('cf-ipcountry') || null;
+    // Track analytics event (fire and forget)
+    const trackAnalytics = async () => {
+      try {
+        const headersList = await headers();
+        const userAgent = headersList.get('user-agent') || '';
+        const referer = headersList.get('referer') || headersList.get('referrer') || null;
+        const countryCode = headersList.get('cf-ipcountry') || null;
 
-      // Create a mock request object for analytics functions
-      const mockReq = {
-        headers: {
-          get: (key) => headersList.get(key)
-        }
-      };
+        // Create a mock request object for analytics functions
+        const mockReq = {
+          headers: {
+            get: (key) => headersList.get(key)
+          }
+        };
 
-      const sessionId = getSessionId(mockReq);
-      const userAgentHash = hashString(userAgent);
+        const sessionId = getSessionId(mockReq);
+        const userAgentHash = hashString(userAgent);
 
-      // Record in Supabase
-      await supabase.rpc('record_asset_event', {
-        p_asset_type: 'qr_code',
-        p_asset_id: qrCode.id,
-        p_event_type: 'scan',
-        p_referer: referer,
-        p_user_agent_hash: userAgentHash,
-        p_country_code: countryCode,
-        p_session_id: sessionId,
-      });
+        // Record in Supabase
+        await supabase.rpc('record_asset_event', {
+          p_asset_type: 'qr_code',
+          p_asset_id: qrCode.id,
+          p_event_type: 'scan',
+          p_referer: referer,
+          p_user_agent_hash: userAgentHash,
+          p_country_code: countryCode,
+          p_session_id: sessionId,
+        });
 
-      // Track in PostHog
-      await trackServerEvent('Asset Visited', {
-        distinctId: sessionId,
-        properties: {
-          asset_id: qrCode.id,
-          asset_type: 'qr_code',
-          qr_code: code,
-          referer: referer,
-          country: countryCode,
-        }
-      });
-    } catch (error) {
-      console.error('Error tracking analytics:', error);
-    }
-  };
+        // Track in PostHog
+        await trackServerEvent('Asset Visited', {
+          distinctId: sessionId,
+          properties: {
+            asset_id: qrCode.id,
+            asset_type: 'qr_code',
+            qr_code: code,
+            referer: referer,
+            country: countryCode,
+          }
+        });
+      } catch (error) {
+        console.error('Error tracking analytics:', error);
+      }
+    };
 
-  trackAnalytics(); // Fire and forget
+    trackAnalytics(); // Fire and forget
+  }
 
   // Redirect to target URL
   redirect(qrCode.target_url);
