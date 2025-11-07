@@ -4,6 +4,7 @@ import { createClient } from '@/libs/supabase/server';
 import { hashString, getSessionId } from '@/libs/analytics';
 import { trackServerEvent } from '@/libs/posthog/server';
 import { headers } from 'next/headers';
+import TextContentDisplay from '@/components/TextContentDisplay';
 
 export const dynamic = 'force-dynamic';
 
@@ -148,6 +149,14 @@ export default async function QRRedirectPage({ params }) {
     trackAnalytics(); // Fire and forget
   }
 
-  // Redirect to target URL
+  // Handle different content types
+  const contentType = qrCode.content_type || 'url'; // Default to 'url' for backwards compatibility
+
+  if (contentType === 'text') {
+    // Display text content with copy functionality
+    return <TextContentDisplay content={qrCode.target_url} />;
+  }
+
+  // Default: Redirect to target URL
   redirect(qrCode.target_url);
 }

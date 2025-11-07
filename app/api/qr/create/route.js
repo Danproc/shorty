@@ -3,24 +3,38 @@ import { createClient } from '@/libs/supabase/server';
 import { generateShortCode, isValidUrl, normalizeUrl } from '@/libs/shortener';
 import { checkSubscription } from '@/libs/subscription';
 
+// Helper function to detect content type
+function detectContentType(input) {
+  // Try to normalize and validate as URL
+  const normalized = normalizeUrl(input);
+  if (isValidUrl(normalized)) {
+    return 'url';
+  }
+
+  // If not a valid URL, treat as plain text
+  return 'text';
+}
+
 export async function POST(req) {
   try {
     const supabase = await createClient();
     const body = await req.json();
     const { targetUrl, title, trackingEnabled } = body;
 
-    // Validate URL
+    // Validate input
     if (!targetUrl) {
       return NextResponse.json(
-        { error: 'Target URL is required' },
+        { error: 'Target content is required' },
         { status: 400 }
       );
     }
 
-    // Normalize URL if it's a valid URL
-    let normalizedUrl = targetUrl;
-    if (isValidUrl(normalizeUrl(targetUrl))) {
-      normalizedUrl = normalizeUrl(targetUrl);
+    // Detect content type and normalize if URL
+    const contentType = detectContentType(targetUrl);
+    let normalizedContent = targetUrl;
+
+    if (contentType === 'url') {
+      normalizedContent = normalizeUrl(targetUrl);
     }
 
     // Get user (optional - anonymous users allowed)
@@ -72,10 +86,11 @@ export async function POST(req) {
         {
           user_id: user?.id || null,
           qr_code: qrCode,
-          target_url: normalizedUrl,
+          target_url: normalizedContent,
           title: title || null,
           is_active: true,
           tracking_enabled: shouldEnableTracking,
+          content_type: contentType,
         },
       ])
       .select()
@@ -94,7 +109,8 @@ export async function POST(req) {
                     `${req.headers.get('x-forwarded-proto') || 'http'}://${req.headers.get('host')}`;
 
     // Determine QR URL based on tracking setting
-    // If tracking is enabled, use redirect URL. Otherwise, use direct target URL.
+    // If tracking is enabled, encode the tracking redirect URL
+    // Otherwise, encode the direct content (URL or plain text)
     const qrUrl = shouldEnableTracking
       ? `${baseUrl}/qr/${qrCodeData.qr_code}`
       : qrCodeData.target_url;
