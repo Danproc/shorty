@@ -8,7 +8,7 @@ import ButtonAccount from "./ButtonAccount";
 import config from "@/config";
 import { createClient } from "@/libs/supabase/client";
 
-const links = [
+const coreLinks = [
   {
     href: "/shorten",
     label: "URL Shortener",
@@ -16,10 +16,6 @@ const links = [
   {
     href: "/qr-generator",
     label: "QR Generator",
-  },
-  {
-    href: "/pricing",
-    label: "Pricing",
   },
 ];
 
@@ -45,6 +41,11 @@ const Header = () => {
     };
     getUser();
   }, [supabase]);
+
+  // Conditionally show Dashboard if logged in, Pricing if not
+  const links = user
+    ? [...coreLinks, { href: "/dashboard", label: "Dashboard" }]
+    : [...coreLinks, { href: "/pricing", label: "Pricing" }];
 
   return (
     <>
