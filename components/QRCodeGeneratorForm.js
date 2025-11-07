@@ -13,6 +13,8 @@ export default function QRCodeGeneratorForm() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hasAccess, setHasAccess] = useState(false);
+  const [trackingEnabled, setTrackingEnabled] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -22,6 +24,19 @@ export default function QRCodeGeneratorForm() {
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     setIsLoggedIn(!!user);
+
+    // Check if user has premium access
+    if (user) {
+      try {
+        const response = await axios.get('/api/auth/me');
+        setHasAccess(response.data.has_access || false);
+        // Default to tracking enabled for premium users
+        setTrackingEnabled(response.data.has_access || false);
+      } catch (error) {
+        console.error('Error checking subscription:', error);
+        setHasAccess(false);
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -48,14 +63,17 @@ export default function QRCodeGeneratorForm() {
         const response = await axios.post('/api/qr/create', {
           targetUrl: trimmedText,
           title: title.trim() || undefined,
+          trackingEnabled: trackingEnabled,
         });
 
         if (response.data.success) {
           setResult({
             text: trimmedText,
+            qrUrl: response.data.data.qrUrl, // The URL to encode in the QR code
             saved: true,
             id: response.data.data.id,
             qrCode: response.data.data.qrCode,
+            trackingEnabled: response.data.data.trackingEnabled,
           });
           toast.success('QR Code created and saved!');
 
@@ -132,6 +150,39 @@ export default function QRCodeGeneratorForm() {
             </div>
           )}
 
+          {/* Tracking Toggle */}
+          {isLoggedIn && (
+            <div className="form-control">
+              <label className="label cursor-pointer justify-start gap-4">
+                <input
+                  type="checkbox"
+                  className="toggle toggle-primary"
+                  checked={trackingEnabled}
+                  onChange={(e) => setTrackingEnabled(e.target.checked)}
+                  disabled={!hasAccess || loading}
+                />
+                <div className="flex flex-col gap-1">
+                  <span className="label-text font-semibold">Enable Scan Tracking</span>
+                  <span className="label-text-alt text-base-content/60">
+                    {hasAccess
+                      ? 'Track how many times your QR code is scanned in your dashboard'
+                      : 'Track QR code scans with detailed analytics'}
+                  </span>
+                </div>
+              </label>
+              {!hasAccess && (
+                <div className="mt-2 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                  <p className="text-sm text-base-content/80">
+                    <strong>Premium Feature:</strong> Upgrade to Premium to unlock scan tracking and view detailed analytics in your dashboard.
+                  </p>
+                  <a href="/pricing" className="btn btn-primary btn-sm mt-2">
+                    Upgrade to Premium
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
@@ -189,7 +240,7 @@ export default function QRCodeGeneratorForm() {
           </div>
 
           {/* QR Code Display */}
-          <QRCodeDisplay url={result.text} />
+          <QRCodeDisplay url={result.qrUrl || result.text} />
 
           {/* Create Another Button */}
           <button onClick={handleReset} className="btn btn-outline w-full">
