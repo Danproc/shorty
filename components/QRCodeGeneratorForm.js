@@ -152,17 +152,17 @@ export default function QRCodeGeneratorForm() {
 
           {/* Tracking Toggle */}
           {isLoggedIn && (
-            <div className="form-control">
-              <label className="label cursor-pointer justify-start gap-4">
+            <div className="form-control border border-base-300 rounded-lg p-4 bg-base-100">
+              <label className="label cursor-pointer justify-start gap-4 mb-0">
                 <input
                   type="checkbox"
-                  className="toggle toggle-primary"
+                  className="checkbox checkbox-primary checkbox-lg"
                   checked={trackingEnabled}
                   onChange={(e) => setTrackingEnabled(e.target.checked)}
                   disabled={!hasAccess || loading}
                 />
                 <div className="flex flex-col gap-1">
-                  <span className="label-text font-semibold">Enable Scan Tracking</span>
+                  <span className="label-text font-semibold text-base">Enable Scan Tracking</span>
                   <span className="label-text-alt text-base-content/60">
                     {hasAccess
                       ? 'Track how many times your QR code is scanned in your dashboard'
@@ -171,7 +171,7 @@ export default function QRCodeGeneratorForm() {
                 </div>
               </label>
               {!hasAccess && (
-                <div className="mt-2 p-3 bg-primary/10 rounded-lg border border-primary/20">
+                <div className="mt-3 p-3 bg-primary/10 rounded-lg border border-primary/20">
                   <p className="text-sm text-base-content/80">
                     <strong>Premium Feature:</strong> Upgrade to Premium to unlock scan tracking and view detailed analytics in your dashboard.
                   </p>

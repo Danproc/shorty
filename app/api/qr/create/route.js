@@ -49,7 +49,7 @@ export async function POST(req) {
         .from('qr_codes')
         .select('id')
         .eq('qr_code', qrCode)
-        .single();
+        .maybeSingle();
 
       if (!existing) {
         break; // Found a unique code
