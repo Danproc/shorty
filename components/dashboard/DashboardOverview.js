@@ -110,7 +110,7 @@ export default function DashboardOverview() {
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="stat bg-base-200 rounded-xl p-5 border-2 border-primary/15 hover:border-primary/30 transition-all hover:shadow-md">
                 <div className="stat-title text-base-content/70 font-semibold uppercase text-xs tracking-wide">Short URLs</div>
                 <div className="stat-value text-3xl text-base-content font-extrabold mt-2">
@@ -130,18 +130,6 @@ export default function DashboardOverview() {
                 </div>
                 <div className="stat-desc mt-2">
                   <Link href="/qr-generator" className="link link-primary font-semibold hover:underline">
-                    Create new →
-                  </Link>
-                </div>
-              </div>
-
-              <div className="stat bg-base-200 rounded-xl p-5 border-2 border-primary/15 hover:border-primary/30 transition-all hover:shadow-md">
-                <div className="stat-title text-base-content/70 font-semibold uppercase text-xs tracking-wide">MD Files</div>
-                <div className="stat-value text-3xl text-base-content font-extrabold mt-2">
-                  {loading ? "..." : stats?.markdownCount || 0}
-                </div>
-                <div className="stat-desc mt-2">
-                  <Link href="/markdown" className="link link-primary font-semibold hover:underline">
                     Create new →
                   </Link>
                 </div>
