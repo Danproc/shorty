@@ -169,18 +169,18 @@ export default function QRsPage() {
                         </td>
                         <td>
                           {qr.tracking_enabled ? (
-                            <div className="badge badge-success badge-sm gap-1 rounded-lg">
+                            <div className="badge badge-sm gap-1 rounded-full bg-green-500 text-black border-0 font-medium">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                               </svg>
-                              Enabled
+                              <span className="text-xs">Enabled</span>
                             </div>
                           ) : (
-                            <div className="badge badge-ghost badge-sm gap-1 rounded-lg">
+                            <div className="badge badge-ghost badge-sm gap-1 rounded-full font-medium">
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                               </svg>
-                              Disabled
+                              <span className="text-xs">Disabled</span>
                             </div>
                           )}
                         </td>

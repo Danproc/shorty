@@ -143,9 +143,15 @@ export default function URLsPage() {
                         </td>
                         <td className="text-sm text-base-content/70">{formatDate(url.created_at)}</td>
                         <td>
-                          <div className={`badge badge-lg rounded-lg ${url.is_active ? 'badge-success' : 'badge-error'}`}>
-                            {url.is_active ? 'Active' : 'Inactive'}
-                          </div>
+                          {url.is_active ? (
+                            <div className="badge badge-sm rounded-full bg-green-500 text-black border-0 font-medium">
+                              <span className="text-xs">Active</span>
+                            </div>
+                          ) : (
+                            <div className="badge badge-ghost badge-sm rounded-full font-medium">
+                              <span className="text-xs">Inactive</span>
+                            </div>
+                          )}
                         </td>
                         <td>
                           <a
