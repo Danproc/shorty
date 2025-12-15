@@ -24,7 +24,7 @@
     "marked": "^16.4.1",
     "marked-gfm-heading-id": "^4.1.2",
     "nanoid": "^5.1.6",
-    "next": "15.1.9",
+    "next": "15.1.11",
     "next-sitemap": "^4.2.3",
     "nextjs-toploader": "^3.7.15",
     "nodemailer": "^6.9.16",
